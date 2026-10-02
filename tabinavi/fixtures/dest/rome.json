@@ -1,0 +1,37 @@
+{
+  "country": "イタリア",
+  "iata": "FCO",
+  "id": "rome",
+  "lat": 41.9,
+  "lon": 12.5,
+  "name": "ローマ",
+  "region": "ヨーロッパ",
+  "route": {
+    "basis": "確認済(スカイチケット 最安運賃の経路)",
+    "duration": "約22時間55分(往路)",
+    "kind": "乗継あり",
+    "note": "最安運賃は香港乗継(キャセイ)",
+    "via": [
+      {
+        "code": "HKG",
+        "lat": 22.31,
+        "lon": 113.92
+      }
+    ]
+  },
+  "status": "wish",
+  "today": {
+    "flight": {
+      "airline": "シンガポール航空",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示)。11/10〜11/15の運賃(前回と同額)。片道最安も同じくシンガポール航空77,410円(11/17)。",
+      "origin": "NGO",
+      "price": 141290,
+      "route": "NGO→SIN→FCO(経由1回・往復で経由2回)",
+      "source": "Trip.com 名古屋発ローマ",
+      "url": "https://jp.trip.com/flights/nagoya-to-rome/airfares-ngo-rom/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

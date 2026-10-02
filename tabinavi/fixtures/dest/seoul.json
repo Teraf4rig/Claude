@@ -1,0 +1,59 @@
+{
+  "country": "韓国",
+  "iata": "ICN",
+  "id": "seoul",
+  "lat": 37.57,
+  "lon": 126.98,
+  "miles": {
+    "basis": "基本マイル数(片道×2)",
+    "chartDate": "2026-04-16",
+    "checkedAt": "2026-09-21T12:00:00+09:00",
+    "cls": "エコノミー",
+    "ow": 7500,
+    "rt": 15000,
+    "source": "JAL 国際線特典航空券 必要マイル数(日本発着・片道・エコノミー基本)",
+    "url": "https://www.jal.co.jp/jp/ja/jalmile/use/jal/inter/routemiles.html"
+  },
+  "name": "ソウル",
+  "region": "アジア",
+  "route": {
+    "basis": "確認済(Trip.com/スカイチケット)",
+    "duration": "約2時間",
+    "kind": "直行",
+    "note": "中部発の直行便(Peach・ジンエア・チェジュ航空など)を確認",
+    "via": []
+  },
+  "spring": {
+    "flight": {
+      "high": 31050,
+      "low": 30360,
+      "rec": 30705
+    },
+    "note": "Trip.com 名古屋発の月別平均(往復・過去12か月): 2月31,050円・3月30,360円。年間最安は5月24,560円。片道の月別平均は2月13,150円・3月12,820円",
+    "when": "3月の方が2月より安い"
+  },
+  "status": "wish",
+  "summer": {
+    "flight": {
+      "high": 33600,
+      "low": 30930,
+      "rec": 32265
+    },
+    "note": "Trip.com 名古屋発の月別平均(往復・過去12か月): 8月33,600円(年間最高)・9月30,930円。片道の月別平均は8月14,280円・9月10,490円",
+    "when": "8月の方が9月より高い(8月は年間最高)"
+  },
+  "today": {
+    "flight": {
+      "airline": "Peach",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示、直行便)。9/24〜9/30の運賃(前回と同額)。片道最安は13,010円。",
+      "origin": "NGO",
+      "price": 23460,
+      "route": "直行",
+      "source": "Trip.com 名古屋発ソウル",
+      "url": "https://jp.trip.com/flights/nagoya-to-seoul/airfares-ngo-sel/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

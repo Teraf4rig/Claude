@@ -1,0 +1,43 @@
+{
+  "country": "米国(ハワイ)",
+  "iata": "HNL",
+  "id": "honolulu",
+  "lat": 21.31,
+  "lon": -157.86,
+  "memo": "JALスペシャル運賃は予約が10/31まで。搭乗区間マイル30%還元。掲載運賃は燃油特別付加運賃込み(2026年9〜10月購入分)。航空保険特別料金・旅客施設使用料は別途。",
+  "miles": {
+    "basis": "基本マイル数(片道×2)",
+    "chartDate": "2026-04-16",
+    "checkedAt": "2026-09-21T12:00:00+09:00",
+    "cls": "エコノミー",
+    "note": "席が基本マイル数で取れない場合は追加マイルが必要(特典航空券PLUS)",
+    "ow": 20000,
+    "rt": 40000,
+    "source": "JAL 国際線特典航空券 必要マイル数(日本発着・片道・エコノミー基本)",
+    "url": "https://www.jal.co.jp/jp/ja/jalmile/use/jal/inter/routemiles.html"
+  },
+  "name": "ホノルル",
+  "region": "北米",
+  "route": {
+    "basis": "第三者サイト掲載",
+    "duration": "約7時間",
+    "kind": "直行",
+    "note": "JAL直行(中部発)。ソロ向け英語圏の第一候補",
+    "via": []
+  },
+  "status": "cand",
+  "today": {
+    "flight": {
+      "airline": "JAL",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "high",
+      "note": "エコノミー往復(東京・大阪・名古屋発、前回と同額)。予約2026/9/1〜10/31(残り約5週間)、搭乗2026/9/6〜2027/7/15、旅行期間2〜14日、払戻不可。燃油特別付加運賃込み、航空保険特別料金・旅客施設使用料は別途。搭乗区間マイル30%還元。",
+      "origin": "NGO",
+      "price": 124600,
+      "route": "NGO→HNL 直行",
+      "source": "JAL スペシャル運賃(北米・ハワイ・グアム)",
+      "url": "https://www.jal.co.jp/jp/ja/inter/fare/special_fare/ame.html"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

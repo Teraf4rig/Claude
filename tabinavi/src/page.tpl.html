@@ -1,0 +1,1715 @@
+<title>旅ナビ 航空マップ</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+:root{
+  --paper:#E8EDEE;--panel:#F8F9F7;--ink:#12222F;--ink2:#52646F;--line:#C6D2D8;
+  --navy:#0F2438;--navy2:#1B4568;--onnavy:#E9F0F4;--onnavy2:#9DB4C4;
+  --sea:#BBD5E3;--sea2:#9CC0D4;--land:#F1F0E8;--coast:#7C97A7;--grat:#A7C4D4;--halo:#F8F9F7;
+  --key-top:#FFFFFF;--key-bot:#DFE7EB;--key-edge:#9DB0BB;--key-hi:rgba(255,255,255,.95);--key-ink:#1D2E3B;
+  --lit-top:#245B8A;--lit-bot:#0F2438;--led:#3BE0A5;
+  --board:#0A1118;--board2:#101B26;--amber:#FFB43C;--bink:#E9EEF1;--bdim:#7C8D99;--bline:#1F3040;
+  --route:#E8621A;--accent:#1B5FD4;--accent-soft:#DCE8F8;
+  --cheap:#14966A;--mid:#D19400;--high:#D6402B;--none:#8697A3;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --serif:'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif;
+  --sans:'Inter','Zen Kaku Gothic New','Hiragino Sans','Yu Gothic',system-ui,sans-serif;
+  --dot:'IBM Plex Mono','Zen Kaku Gothic New','Hiragino Sans','Yu Gothic',ui-monospace,monospace;
+  --e1:0 1px 2px rgba(8,20,32,.07);
+  --e2:0 1px 1px rgba(8,20,32,.05),0 12px 26px -16px rgba(8,20,32,.38);
+  --e3:0 2px 4px rgba(8,20,32,.09),0 24px 50px -20px rgba(8,20,32,.5);
+  --route-rgb:232,98,26;--accent-rgb:27,95,212;
+  --m-bg:#050B11;--m-sea:#10263A;--m-sea2:#081523;--m-land:#1B3A52;--m-dot:#7AA6C2;--m-coast:#4D7C9B;--m-grat:#132B3E;
+  --m-ring:#2F6283;--m-ring-t:#7FA9C4;--m-ink:#E3EDF3;--m-dim:#8AA5B8;--m-halo:#06111B;
+  --m-cheap:#3FC38B;--m-mid:#E3AE2B;--m-high:#EE7A66;--m-none:#6F8595;
+  --spring:#C8457A;--summer:#C27400;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#081017;--panel:#0F1A24;--ink:#E6EEF2;--ink2:#8FA4B1;--line:#1E3140;
+    --navy:#050B11;--navy2:#0F2A40;--onnavy:#E6EEF2;--onnavy2:#8AA3B4;
+    --sea:#0C2131;--sea2:#0A1A28;--land:#182B3B;--coast:#345A70;--grat:#12293A;--halo:#0F1A24;
+    --key-top:#25394C;--key-bot:#162838;--key-edge:#071018;--key-hi:rgba(255,255,255,.14);--key-ink:#DCE8EE;
+    --lit-top:#2C6FB3;--lit-bot:#173B63;--led:#3BE0A5;
+    --board:#04080C;--board2:#0A131B;--bline:#1A2A38;
+    --route:#FF8A3D;--accent:#6AAAFF;--accent-soft:#132B45;
+    --cheap:#3FC38B;--mid:#E3AE2B;--high:#EA7561;--none:#6A7E8B;
+    --e1:0 1px 2px rgba(0,0,0,.55);
+    --e2:0 1px 1px rgba(0,0,0,.4),0 12px 28px -16px rgba(0,0,0,.7);
+    --e3:0 2px 6px rgba(0,0,0,.55),0 26px 56px -20px rgba(0,0,0,.8);
+    --route-rgb:255,138,61;--accent-rgb:106,170,255;
+    --spring:#F07CA6;--summer:#FFB547;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#081017;--panel:#0F1A24;--ink:#E6EEF2;--ink2:#8FA4B1;--line:#1E3140;
+  --navy:#050B11;--navy2:#0F2A40;--onnavy:#E6EEF2;--onnavy2:#8AA3B4;
+  --sea:#0C2131;--sea2:#0A1A28;--land:#182B3B;--coast:#345A70;--grat:#12293A;--halo:#0F1A24;
+  --key-top:#25394C;--key-bot:#162838;--key-edge:#071018;--key-hi:rgba(255,255,255,.14);--key-ink:#DCE8EE;
+  --lit-top:#2C6FB3;--lit-bot:#173B63;--led:#3BE0A5;
+  --board:#04080C;--board2:#0A131B;--bline:#1A2A38;
+  --route:#FF8A3D;--accent:#6AAAFF;--accent-soft:#132B45;
+  --cheap:#3FC38B;--mid:#E3AE2B;--high:#EA7561;--none:#6A7E8B;
+  --e1:0 1px 2px rgba(0,0,0,.55);
+  --e2:0 1px 1px rgba(0,0,0,.4),0 12px 28px -16px rgba(0,0,0,.7);
+  --e3:0 2px 6px rgba(0,0,0,.55),0 26px 56px -20px rgba(0,0,0,.8);
+  --route-rgb:255,138,61;--accent-rgb:106,170,255;
+  --spring:#F07CA6;--summer:#FFB547;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background-color:var(--paper);background-image:var(--grain);color:var(--ink);font:400 14px/1.7 var(--sans);letter-spacing:.01em}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.wrap{max-width:1560px;margin:0 auto;padding-inline:20px}
+section{scroll-margin-top:12px}
+h1,h2,h3{font-family:var(--serif);margin:0;text-wrap:balance}
+a{color:var(--accent)}
+button,input{font-family:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---- masthead ---- */
+.mast{background:var(--navy);color:var(--onnavy);border-bottom:3px solid var(--route)}
+.mast .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 28px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.brand svg{width:38px;height:38px;color:var(--onnavy)}
+.brand b{display:block;font:800 24px/1 var(--serif);letter-spacing:.06em}
+.brand small{display:block;font:400 11px/1.2 var(--dot);letter-spacing:.14em;color:var(--onnavy2);margin-top:5px}
+.nav{display:flex;flex-wrap:wrap;gap:4px 22px;font:500 13px var(--sans)}
+.nav a{color:var(--onnavy);text-decoration:none;padding:6px 0;border-bottom:2px solid transparent}
+.nav a:hover{border-bottom-color:var(--route)}
+.stat{font:400 12px/1.5 var(--dot);color:var(--onnavy2);text-align:right}
+.stat b{color:var(--amber);font-weight:400}
+
+/* ---- hero ---- */
+.hero{padding-block:34px 22px;position:relative}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,440px);gap:26px 48px;align-items:end}
+.hero-fx{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.hero-fx svg{width:100%;height:100%;display:block}
+.hero-fx .arc-ghost{fill:none;stroke:var(--route);stroke-width:1;stroke-dasharray:1 7;opacity:.16}
+.hero-fx .arc-draw{fill:none;stroke:var(--route);stroke-width:1.6;stroke-linecap:round;opacity:.5;stroke-dasharray:1000;stroke-dashoffset:1000;animation:heroDraw 1.7s .25s cubic-bezier(.25,.65,.2,1) forwards}
+.hero-fx .arc-home{fill:var(--navy);opacity:.5}
+.hero-fx .arc-pin{fill:var(--route);opacity:0;animation:heroPinIn .4s 1.9s forwards}
+@keyframes heroDraw{to{stroke-dashoffset:0}}
+@keyframes heroPinIn{to{opacity:.85}}
+@media (prefers-reduced-motion:reduce){.hero-fx .arc-draw{animation:none;stroke-dashoffset:0}.hero-fx .arc-pin{animation:none;opacity:.85}}
+@media (max-width:1100px){.hero-fx{opacity:.7}}
+.eyebrow{font:400 12px/1.4 var(--dot);letter-spacing:.16em;color:var(--ink2)}
+.hero h1{font-size:clamp(32px,4.6vw,58px);line-height:1.12;font-weight:800;letter-spacing:.02em;margin:8px 0 12px}
+.hero h1 em{font-style:normal;color:var(--route)}
+.lead{max-width:560px;color:var(--ink2);margin:0 0 20px}
+.keys{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
+.keys + .keys{margin-top:10px}
+.keys .cap{font:400 11px var(--dot);letter-spacing:.12em;color:var(--ink2);margin:0 4px 0 0}
+
+/* tactile keys */
+.key{display:inline-flex;align-items:center;gap:0;font:700 13px/1 var(--sans);color:var(--key-ink);padding:11px 16px 10px;border-radius:9px;border:1px solid var(--key-edge);border-bottom-width:4px;background:linear-gradient(180deg,var(--key-top),var(--key-bot));box-shadow:inset 0 1px 0 var(--key-hi),0 1px 1px rgba(0,0,0,.08);cursor:pointer;transition:transform .06s,border-bottom-width .06s;user-select:none;letter-spacing:.03em}
+.key small{font:400 11px var(--sans);opacity:.7;margin-left:5px}
+.key:hover{filter:brightness(1.04)}
+.key:active{transform:translateY(3px);border-bottom-width:1px;box-shadow:inset 0 2px 5px rgba(0,0,0,.22)}
+.key[aria-pressed="true"]{color:#fff;border-color:#06101a;background:linear-gradient(180deg,var(--lit-top),var(--lit-bot));box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -3px 8px rgba(0,0,0,.35)}
+.key[aria-pressed="true"]::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--led);box-shadow:0 0 7px var(--led);margin-right:8px}
+.key.sm{padding:7px 10px 6px;font-size:12px;border-radius:7px;border-bottom-width:3px}
+.key.go{color:#fff;border-color:#8c3608;background:linear-gradient(180deg,#F98A4A,var(--route));box-shadow:inset 0 1px 0 var(--key-hi),0 10px 22px -12px rgba(var(--route-rgb),.55)}
+.key.warn{color:#fff;border-color:#6d1a10;background:linear-gradient(180deg,#E8624F,#B7301D)}
+.key[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+
+/* miles ticket in hero */
+.miles-tk{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 22px 16px;box-shadow:0 1px 0 var(--key-hi) inset,var(--e2)}
+.miles-tk::before,.miles-tk::after{content:"";position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--paper);border:1px solid var(--line);transform:translateY(-50%)}
+.miles-tk::before{left:-10px;clip-path:inset(0 0 0 50%)}
+.miles-tk::after{right:-10px;clip-path:inset(0 50% 0 0)}
+.miles-tk .lbl{display:flex;justify-content:space-between;gap:10px;font:400 11px var(--dot);letter-spacing:.12em;color:var(--ink2)}
+.miles-tk .val{margin:8px 0 6px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.miles-tk .u{font:700 13px var(--sans);color:var(--ink2)}
+.miles-tk p{margin:0;color:var(--ink2);font-size:12.5px}
+.miles-tk .edit{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.field{font:500 14px var(--sans);color:var(--ink);background:var(--panel);border:1px solid var(--key-edge);border-radius:8px;padding:9px 12px;box-shadow:inset 0 2px 3px rgba(0,0,0,.08);min-width:0}
+.field::placeholder{color:var(--ink2);opacity:.8}
+
+/* split-flap */
+.flap{display:inline-flex;gap:3px;font-size:var(--fs,28px);line-height:1}
+.flap i{font:normal 600 1em/1 var(--dot);font-variant-numeric:tabular-nums lining-nums;display:grid;place-items:center;min-width:.68em;padding:.19em .1em .15em;background:linear-gradient(180deg,#2B323A 0 50%,#1A1F25 50% 100%);color:#F3F3EA;border-radius:.14em;position:relative;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),0 .07em .12em rgba(0,0,0,.4);transform-origin:50% 50%;animation:flip .5s cubic-bezier(.3,.7,.3,1) both;animation-delay:calc(var(--i,0)*45ms)}
+.flap i::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.7);box-shadow:0 1px 0 rgba(255,255,255,.07)}
+.flap i.s{background:none;box-shadow:none;min-width:.34em;padding-inline:0;color:var(--ink2);animation:none}
+.flap i.s::after{display:none}
+.flap.amber i:not(.s){color:var(--amber)}
+@keyframes flip{from{transform:perspective(200px) rotateX(-85deg);opacity:.15}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.flap i{animation:none}}
+
+/* ---- atlas ---- */
+.atlas{padding-block:8px 34px}
+.atlas .wrap{display:grid;grid-template-columns:minmax(0,1fr) 430px;grid-template-areas:"map pass" "board pass";gap:20px;align-items:start}
+.mapwrap{grid-area:map}.bdw{grid-area:board;min-width:0}
+.mapwrap{position:relative;border-radius:14px;overflow:hidden;border:1px solid #000;background:var(--m-bg);box-shadow:var(--e3),inset 0 0 0 1px rgba(120,170,200,.08)}
+.mapwrap::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;background:repeating-linear-gradient(180deg,rgba(255,255,255,.022) 0 1px,transparent 1px 3px),radial-gradient(120% 95% at 55% 45%,transparent 58%,rgba(0,0,0,.5) 100%)}
+.mapwrap::after{content:"";position:absolute;inset:9px;pointer-events:none;z-index:1;--c:rgba(140,190,220,.5);
+  background:linear-gradient(var(--c),var(--c)) 0 0/16px 1px no-repeat,linear-gradient(var(--c),var(--c)) 0 0/1px 16px no-repeat,
+  linear-gradient(var(--c),var(--c)) 100% 0/16px 1px no-repeat,linear-gradient(var(--c),var(--c)) 100% 0/1px 16px no-repeat,
+  linear-gradient(var(--c),var(--c)) 0 100%/16px 1px no-repeat,linear-gradient(var(--c),var(--c)) 0 100%/1px 16px no-repeat,
+  linear-gradient(var(--c),var(--c)) 100% 100%/16px 1px no-repeat,linear-gradient(var(--c),var(--c)) 100% 100%/1px 16px no-repeat}
+#map-svg{display:block;width:100%;height:auto;touch-action:none;cursor:grab;user-select:none;background:var(--m-bg)}
+#map-svg.drag{cursor:grabbing}#map-svg.pick{cursor:crosshair}
+.sphere{stroke:rgba(120,170,200,.22);stroke-width:1;vector-effect:non-scaling-stroke}
+.land-base{fill:var(--m-land);fill-opacity:calc(.7 - var(--inv,1)*.38);stroke:none}
+.land{fill:url(#dotP);stroke:var(--m-coast);stroke-width:.6;stroke-opacity:.75;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.grat{fill:none;stroke:var(--m-grat);stroke-width:.7;vector-effect:non-scaling-stroke}
+.ring{fill:none;stroke:var(--m-ring);stroke-width:1;stroke-dasharray:2 5;vector-effect:non-scaling-stroke}
+.ring-l text{font:500 9.5px var(--dot);fill:var(--m-ring-t);letter-spacing:.08em;paint-order:stroke;stroke:var(--m-halo);stroke-width:3px;stroke-linejoin:round}
+.rt{fill:none;stroke:var(--route);stroke-width:1;opacity:.2;vector-effect:non-scaling-stroke}
+.rt.alt{opacity:.5;stroke-dasharray:3 4}
+.rt.glow{opacity:.4;stroke-width:6;filter:url(#glow)}
+.rt.on{opacity:1;stroke-width:2;stroke-linecap:round}
+.rt.flow{opacity:.95;stroke:#FFE6D1;stroke-width:2.2;stroke-dasharray:1.5 11;stroke-linecap:round;animation:flow 1.1s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-12.5}}
+.rt.pv{opacity:1;stroke:#7FB6FF;stroke-width:2;stroke-dasharray:7 5;stroke-linecap:butt}
+.dist rect{fill:rgba(5,11,17,.9);stroke:var(--route);stroke-width:.8}
+.dist text{font:600 10px var(--dot);fill:#FFDCC2;letter-spacing:.05em}
+.pin{cursor:pointer}
+.pin .in{transform:scale(var(--inv,1))}
+.pin .aura{opacity:.2;transition:opacity .15s}
+.pin .core{stroke:var(--m-halo);stroke-width:1.4;transition:transform .12s;transform-origin:0 0}
+.pin.cand .core{fill:var(--m-halo);stroke-width:1.7;stroke-dasharray:2.2 1.6}
+.pin:hover .core,.pin.sel .core{transform:scale(1.4)}
+.pin:hover .aura,.pin.sel .aura{opacity:.4}
+.pin:focus-visible .core{stroke:#fff;stroke-width:2}
+.pin .ripple{fill:none;stroke-width:1.4;opacity:0;transform-origin:0 0}
+.pin.sel .ripple{animation:ripple 1.8s ease-out infinite}
+@keyframes ripple{from{transform:scale(.6);opacity:.95}to{transform:scale(3.6);opacity:0}}
+.tag rect{fill:rgba(6,12,19,.92);stroke:rgba(140,190,220,.3);stroke-width:.8}
+.tag .band{stroke:none}
+.tag .lead{stroke:rgba(160,200,225,.5);stroke-width:.8;fill:none}
+.tag text{font:600 10.5px var(--dot);letter-spacing:.02em}
+.tag .c{fill:var(--m-dim)}
+.pin.hid .tag{visibility:hidden}
+.pin.hid:hover .tag,.pin.hid:focus-visible .tag{visibility:visible}
+.pin.sel .tag rect{stroke:var(--route);stroke-width:1.2}
+.pin .nm{font:700 11.5px var(--sans);fill:var(--m-ink);paint-order:stroke;stroke:var(--m-halo);stroke-width:3.4px;stroke-linejoin:round;opacity:0}
+.pin:hover .nm,.pin:focus-visible .nm,.pin.sel .nm{opacity:1}
+.home .pulse{fill:none;stroke:var(--route);stroke-width:1.3;opacity:0;transform-origin:0 0;animation:ripple 2.6s ease-out infinite}
+.home rect{fill:var(--route);stroke:#fff;stroke-width:1.3}
+.home text{font:600 10.5px var(--dot);fill:var(--m-ink);paint-order:stroke;stroke:var(--m-halo);stroke-width:3.4px;stroke-linejoin:round;letter-spacing:.06em}
+.plane{fill:#FFE6D1;stroke:var(--m-halo);stroke-width:.8}
+.tools{position:absolute;top:12px;right:12px;display:grid;gap:8px;z-index:2}
+.tools .key{width:38px;height:36px;padding:0;justify-content:center;font-size:16px;color:var(--m-ink);border-color:#02070b;background:linear-gradient(180deg,#1D3447,#0E1F2E);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 4px 10px -4px rgba(0,0,0,.6)}
+.hud{position:absolute;right:18px;bottom:14px;text-align:right;z-index:2;font:500 10px/1.7 var(--dot);letter-spacing:.12em;color:var(--m-dim);pointer-events:none}
+.hud b{color:var(--m-ink);font-weight:600}
+.hud .live{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--led);box-shadow:0 0 8px var(--led);margin-right:7px;vertical-align:1px;animation:blink 2.2s ease-in-out infinite}
+@keyframes blink{50%{opacity:.3}}
+.legend{position:absolute;left:12px;bottom:12px;z-index:2;background:rgba(5,11,17,.78);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(140,190,220,.2);border-radius:10px;padding:8px 12px;font-size:11.5px;color:var(--m-dim);display:grid;gap:4px;max-width:calc(100% - 24px)}
+.legend .r{display:flex;flex-wrap:wrap;gap:3px 13px;align-items:center}
+.lg{display:inline-flex;align-items:center;gap:6px}
+.lg i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.lg i.f{background:var(--m-ink)}
+.lg i.h{background:transparent;border:1.5px dashed var(--m-dim)}
+.lg i.rg{width:16px;height:0;border-radius:0;border-top:1px dashed var(--m-ring-t)}
+.pickbar{position:absolute;left:50%;top:12px;z-index:3;transform:translateX(-50%);background:var(--navy);color:var(--onnavy);border:1px solid var(--route);border-radius:999px;padding:7px 16px;font:500 12.5px var(--sans);display:none;box-shadow:0 8px 20px -8px rgba(0,0,0,.6)}
+.pickbar.on{display:block}
+.state{position:absolute;inset:0;z-index:3;display:none;place-items:center;text-align:center;padding:24px;background:rgba(5,11,17,.82);font-size:14px;color:var(--m-ink)}
+.state.on{display:grid}
+@media (prefers-reduced-motion:reduce){.pin.sel .ripple{animation:none;opacity:.7;transform:scale(1.8)}.rt.flow,.home .pulse,.hud .live{animation:none}}
+@media (max-width:900px){.hud{display:none}}
+@media (max-width:640px){
+  .legend{position:static;max-width:none;border:0;border-top:1px solid rgba(140,190,220,.18);border-radius:0;background:rgba(5,11,17,.94);font-size:11px;padding:8px 12px}
+  .tools{top:8px;right:8px;gap:6px}.tools .key{width:32px;height:30px;font-size:14px}
+  .mapwrap::after{inset:6px}
+}
+
+/* ---- boarding pass ---- */
+.pass{grid-area:pass;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--e3);overflow:hidden;min-width:0}
+.pass-h{background:var(--navy);color:var(--onnavy);padding:9px 18px;display:flex;justify-content:space-between;align-items:center;gap:8px;font:400 11px var(--dot);letter-spacing:.16em}
+.badge{font:700 11px/1 var(--sans);letter-spacing:.04em;padding:5px 8px;border-radius:5px;background:var(--route);color:#fff}
+.badge.w{background:transparent;border:1px dashed var(--onnavy2);color:var(--onnavy2)}
+.pass-m{padding:16px 18px 14px}
+.codes{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
+.cd b{display:block;font:400 clamp(30px,3.4vw,42px)/1 var(--dot);letter-spacing:.06em}
+.cd small{display:block;font:500 12px/1.3 var(--sans);color:var(--ink2);margin-top:5px;overflow-wrap:anywhere}
+.cd.r{text-align:right}
+.codes svg{width:30px;height:30px;color:var(--route)}
+.dname{margin:10px 0 0;font-size:22px;font-weight:800;line-height:1.25}
+.dsub{color:var(--ink2);font-size:12.5px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0}
+.tabs .key{font-size:12px;padding:8px 11px 7px}
+.tabs .key b{font:400 11px var(--dot);margin-left:7px;opacity:.9}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;margin:12px 0 2px;font:400 13px var(--dot)}
+.chain .ap{padding:3px 7px;border:1px solid var(--line);border-radius:4px;background:var(--paper)}
+.chain .ap.e{border-color:var(--route);color:var(--route)}
+.chain .ar{color:var(--ink2)}
+.note{color:var(--ink2);font-size:12.5px;margin:4px 0 0}
+.perf{position:relative;height:0;border-top:2px dashed var(--line);margin:0 16px}
+.perf::before,.perf::after{content:"";position:absolute;top:-11px;width:20px;height:20px;border-radius:50%;background:var(--paper);border:1px solid var(--line)}
+.perf::before{left:-27px;clip-path:inset(0 0 0 50%)}.perf::after{right:-27px;clip-path:inset(0 50% 0 0)}
+.pass-s{padding:16px 18px 18px}
+.cap{font:400 11px var(--dot);letter-spacing:.14em;color:var(--ink2);margin-bottom:6px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:12.5px;margin:10px 0 0}
+.kv dt{color:var(--ink2)}.kv dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.tag2{display:inline-block;font:700 10.5px/1 var(--sans);padding:3px 6px;border-radius:4px;border:1px solid var(--mid);color:var(--mid);margin-left:6px}
+.sub-sec{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mini{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.mini .v{font:400 22px/1.15 var(--dot);margin:2px 0 4px}
+.mini p{margin:2px 0 0;font-size:12px;color:var(--ink2)}
+.empty{color:var(--ink2);font-size:13px;margin:0}
+.mstat{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.pill{font:700 11.5px/1 var(--sans);padding:6px 9px;border-radius:999px;color:#fff}
+.pill.ok{background:var(--cheap)}.pill.ow{background:var(--mid)}.pill.short{background:var(--none)}
+.editor{margin-top:12px;border:1px solid var(--route);border-radius:12px;padding:12px 12px 14px;background:var(--paper)}
+.editor h4{margin:0 0 8px;font:700 13px var(--sans)}
+.edchain{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:12px;font:400 13px var(--dot)}
+.chip{display:inline-flex;align-items:center;gap:2px;padding:3px 3px 3px 8px;border:1px solid var(--route);border-radius:999px;background:var(--panel)}
+.chip button{border:0;background:none;color:var(--ink2);cursor:pointer;font:700 13px var(--sans);padding:0 5px}
+.hubs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.hubs .key{font-size:11.5px;padding:6px 8px 5px;border-bottom-width:3px}
+.hubs .key small{margin-left:4px}
+.ed-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.sugg{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:4px}
+.sugg li{display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:8px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+.sugg b{font:400 14px var(--dot)}
+.sugg span{min-width:0;overflow-wrap:anywhere}
+.sugg small{color:var(--ink2);margin-left:6px}
+.owner-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;margin-top:16px;padding-top:12px;border-top:1px dashed var(--line)}
+
+/* ---- board ---- */
+.sec-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 18px;margin-bottom:12px}
+.sec-h h2{font-size:26px;font-weight:800}
+.sec-h p{margin:0;color:var(--ink2);font-size:13px}
+.board{background:var(--board);color:var(--bink);border-radius:14px;border:1px solid #000;box-shadow:var(--e3),inset 0 0 0 1px var(--bline);background-image:var(--grain);overflow:hidden}
+.btop{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 16px 12px;background:linear-gradient(180deg,#141F2A,#0B141C);border-bottom:1px solid var(--bline)}
+.bt-l{display:flex;align-items:baseline;gap:6px 14px;flex-wrap:wrap;min-width:0}
+.bt-en{font:600 17px/1 var(--dot);letter-spacing:.3em;color:var(--amber);text-shadow:0 0 12px rgba(255,180,60,.35)}
+.bt-ja{font:500 12px var(--sans);color:var(--bdim)}
+.bt-r{display:flex;align-items:baseline;gap:7px;flex:none}
+.bclock{font:600 17px/1 var(--dot);color:var(--bink);letter-spacing:.08em;font-variant-numeric:tabular-nums}
+.bt-z{font:500 10px var(--dot);color:var(--bdim);letter-spacing:.16em}
+.bhead,.brow{display:grid;grid-template-columns:28px 30px minmax(140px,1.5fr) 80px minmax(110px,1.2fr) minmax(140px,1.1fr) minmax(112px,.9fr) 84px;gap:0 10px;align-items:center;padding:0 16px}
+.bhead{padding-block:9px;background:var(--board2);color:var(--bdim);font:500 10.5px var(--dot);letter-spacing:.14em;border-bottom:1px solid var(--bline)}
+.bhead .r{text-align:right;justify-content:flex-end}
+.brow{width:100%;text-align:left;border:0;border-bottom:1px solid rgba(255,255,255,.045);color:inherit;padding-block:10px;cursor:pointer;position:relative;transition:background .12s}
+.brow.z{background:rgba(255,255,255,.02)}
+.brow:hover{background:rgba(255,180,60,.07)}
+.brow[aria-current="true"]{background:linear-gradient(90deg,rgba(var(--route-rgb),.24),rgba(var(--route-rgb),.06) 60%,transparent)}
+.brow[aria-current="true"]::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--route);box-shadow:0 0 12px rgba(var(--route-rgb),.85)}
+.brow:last-child{border-bottom:0}
+.brow:focus-visible{outline:2px solid var(--amber);outline-offset:-2px}
+.bn{font:500 12px var(--dot);color:var(--bdim)}
+.bname{min-width:0;display:grid;gap:2px}
+.bnm{display:flex;align-items:center;gap:8px;font:700 15px/1.3 var(--sans);min-width:0}
+.bnm .nt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bname small{font:400 11px var(--sans);color:var(--bdim);padding-left:17px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bname .dt{flex:none;width:9px;height:9px;border-radius:50%}
+.bname .dt.h{background:transparent!important;border:2px dashed}
+.mcode{display:none;font:600 11px var(--dot);color:var(--amber);letter-spacing:.06em;margin-right:6px}
+.bname .rmk-in{display:none;justify-self:start;margin:4px 0 0 17px}
+.rmk-sm{display:none;font:700 10.5px var(--sans);letter-spacing:.03em}
+.rmk-sm.hot{color:#3FC38B}.rmk-sm.mi{color:#5CE6AE}.rmk-sm.old{color:#FFD166}.rmk-sm.high{color:#F08B79}.rmk-sm.std,.rmk-sm.wait{color:var(--bdim)}
+.bflap{display:inline-flex;gap:2px}
+.bflap i{font:600 14px/1 var(--dot);font-style:normal;color:var(--amber);width:19px;padding:5px 0 4px;text-align:center;background:linear-gradient(180deg,#1F2831 0 50%,#151B22 50%);border-radius:3px;position:relative;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),0 1px 1px rgba(0,0,0,.5)}
+.bflap i::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.75)}
+#brows.anim .bflap i{animation:flip .45s cubic-bezier(.3,.7,.3,1) both;animation-delay:var(--d,0ms)}
+.brt{min-width:0}
+.brt .ch{display:block;font:500 12.5px var(--dot);color:var(--bink);letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brt small{display:block;color:var(--bdim);font:400 11px var(--sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bpr{display:grid;justify-items:end;gap:5px;min-width:0}
+.bpr b{font:600 18px/1 var(--dot);color:var(--amber);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.bpr.none b{color:var(--bdim);font:500 13px var(--sans)}
+.pbar{display:block;width:100%;max-width:130px;height:3px;border-radius:2px;background:rgba(255,255,255,.07);overflow:hidden}
+.pbar i{display:block;height:100%;border-radius:2px}
+.bpr small{font:400 10.5px var(--sans);color:var(--bdim)}
+.bmi{display:grid;justify-items:end;gap:4px;min-width:0}
+.bmi b{font:600 14.5px/1 var(--dot);font-variant-numeric:tabular-nums}
+.bmi small{font:400 10.5px var(--sans);color:var(--bdim);white-space:nowrap}
+.mbar{display:block;width:100%;max-width:92px;height:3px;border-radius:2px;background:rgba(255,255,255,.08);overflow:hidden}
+.mbar i{display:block;height:100%;background:#5E7A90}
+.bmi.ok b{color:#5CE6AE}.bmi.ok .mbar i{background:#3FC38B;box-shadow:0 0 6px #3FC38B}
+.bmi.ow b{color:#FFD166}.bmi.ow .mbar i{background:#E3AE2B}
+.bmi.short b{color:var(--bink)}.bmi.none b{color:var(--bdim)}
+.c8{display:flex;justify-content:flex-end}
+.rmk{display:inline-block;font:700 10.5px/1 var(--sans);letter-spacing:.04em;padding:5px 8px 4px;border-radius:4px;border:1px solid;white-space:nowrap}
+.rmk.hot{color:#06140E;background:#3FC38B;border-color:#3FC38B;box-shadow:0 0 10px -2px rgba(63,195,139,.7)}
+.rmk.mi{color:#5CE6AE;border-color:rgba(92,230,174,.5)}
+.rmk.old{color:#FFD166;border-color:rgba(255,209,102,.5)}
+.rmk.high{color:#F08B79;border-color:rgba(234,117,97,.45)}
+.rmk.std{color:var(--bdim);border-color:#2A3B4A}
+.rmk.wait{color:var(--bdim);border-style:dashed;border-color:#2A3B4A}
+.bfoot{display:flex;justify-content:space-between;align-items:center;gap:8px 12px;flex-wrap:wrap;padding:10px 16px;color:var(--bdim);font:500 11px var(--dot);letter-spacing:.08em;border-top:1px solid var(--bline);background:var(--board2)}
+.bmore{font:700 12px var(--sans);color:var(--amber);background:transparent;border:1px solid rgba(255,180,60,.4);border-radius:6px;padding:7px 12px;cursor:pointer;letter-spacing:.03em}
+.bmore:hover{background:rgba(255,180,60,.1)}
+.board-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:10px}
+.board-tools .bq{flex:1 1 220px;min-width:0}
+.board-tools .bq input{width:100%}
+.board-tools select{flex:0 0 auto;cursor:pointer}
+.bcmp,.bcmp-h{display:flex;align-items:center;justify-content:center}
+.bcmp-h{font:400 11px var(--dot);color:var(--bdim)}
+.cmpbtn{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--bline);background:transparent;color:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;font:700 13px var(--dot);padding:0;transition:.15s}
+.cmpbtn:hover{border-color:var(--amber);color:var(--amber)}
+.cmpbtn[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:var(--board)}
+.cmpbtn:disabled{opacity:.3;cursor:not-allowed}
+.cmpwrap{margin-top:16px}
+.cmpwrap[hidden]{display:none}
+.cmp-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:10px}
+.cmp-h h3{font-size:16px;font-weight:800}
+.cmp-h h3 span{color:var(--ink2);font-weight:500;font-size:13px}
+.cmpgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.cmpcard{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--e1);position:relative}
+.cmpcard .x{position:absolute;top:10px;right:10px;width:22px;height:22px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--ink2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;line-height:1;padding:0}
+.cmpcard .x:hover{border-color:var(--route);color:var(--route)}
+.cmpcard h4{font-size:16px;font-weight:800;padding-right:26px;margin-bottom:1px}
+.cmpcard .sub{color:var(--ink2);font-size:11.5px;margin-bottom:10px}
+.cmpcard .kv dd{text-align:right}
+
+/* ---- add ---- */
+.add{padding-block:6px 30px}
+.addbox{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px;box-shadow:var(--e2)}
+.addbox h3{font-size:17px;font-weight:700;margin-bottom:6px}
+.addbox p{color:var(--ink2);margin:0 0 12px;font-size:13px}
+.addbox .field{width:100%}
+.how{display:grid;gap:12px;counter-reset:st}
+.how div{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}
+.how div::before{counter-increment:st;content:counter(st);font:400 20px/1 var(--dot);width:34px;height:34px;border-radius:50%;border:2px solid var(--route);color:var(--route);display:grid;place-items:center}
+.how b{display:block;font-weight:700}
+.how span{color:var(--ink2);font-size:12.5px}
+.rowsel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+
+/* ---- miles ---- */
+.mi{padding-block:6px 40px}
+.milebox{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px;box-shadow:var(--e2)}
+.msum{display:grid;grid-template-columns:auto repeat(3,minmax(0,1fr));gap:16px 30px;align-items:start;padding-bottom:20px;border-bottom:1px dashed var(--line)}
+.ms-k{font:500 10.5px var(--dot);letter-spacing:.14em;color:var(--ink2);margin-bottom:8px}
+.ms-v{min-height:34px;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.ms-v b{font:600 30px/1 var(--dot);font-variant-numeric:tabular-nums}
+.ms-v small{font:600 13px var(--sans);color:var(--ink2)}
+.ms-v.t{font:800 19px/1.3 var(--serif);align-items:center}
+.ms-s{font-size:12px;color:var(--ink2);margin-top:6px}
+.ms-s b{color:var(--ink);font:600 12px var(--dot)}
+.runway{margin:40px 8px 6px}
+.rw-track{position:relative;height:30px;border-radius:7px;background:var(--paper);border:1px solid var(--line);box-shadow:inset 0 2px 4px rgba(0,0,0,.06)}
+.rw-reach,.rw-ow{position:absolute;top:0;bottom:0;overflow:hidden}
+.rw-reach{left:0;border-radius:6px 0 0 6px;background:repeating-linear-gradient(135deg,rgba(20,150,106,.34) 0 5px,rgba(20,150,106,.16) 5px 10px)}
+.rw-ow{background:repeating-linear-gradient(135deg,rgba(209,148,0,.26) 0 5px,rgba(209,148,0,.1) 5px 10px)}
+.rw-zl{position:absolute;left:10px;top:50%;transform:translateY(-50%);font:600 10.5px var(--dot);letter-spacing:.1em;white-space:nowrap}
+.rw-zl.ok{color:var(--cheap)}.rw-zl.ow{color:var(--mid)}
+.rw-n{position:absolute;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;transform:rotate(45deg);border:2px solid var(--panel);box-shadow:0 0 0 1px var(--line);z-index:1}
+.rw-n.ok{background:var(--cheap)}.rw-n.ow{background:var(--mid)}.rw-n.short{background:var(--none)}
+.rw-bal{position:absolute;top:-12px;bottom:-8px;width:2px;margin-left:-1px;background:var(--route);box-shadow:0 0 10px rgba(var(--route-rgb),.6);z-index:2}
+.rw-bal span{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:3px;white-space:nowrap;font:600 11px var(--dot);color:#fff;background:var(--route);padding:4px 8px 3px;border-radius:4px;letter-spacing:.04em}
+.rw-axis{position:relative;height:18px;margin-top:9px}
+.rw-axis span{position:absolute;top:0;transform:translateX(-50%);font:500 10.5px var(--dot);color:var(--ink2)}
+.ladder{margin-top:18px}
+.lr{display:grid;grid-template-columns:112px 176px minmax(0,1fr);gap:8px 18px;align-items:center;padding:13px 4px;border-top:1px solid var(--line)}
+.lr:first-child{border-top:0}
+.lr-v b{display:block;font:600 18px/1.1 var(--dot);font-variant-numeric:tabular-nums}
+.lr-v small{font:500 10.5px var(--dot);color:var(--ink2);letter-spacing:.06em;white-space:nowrap}
+.lr-s{display:flex;align-items:center;gap:9px;font:700 12.5px/1.35 var(--sans)}
+.lr-s i{width:9px;height:9px;transform:rotate(45deg);flex:none}
+.lr-s em{display:block;font:500 11px var(--dot);font-style:normal;color:var(--ink2)}
+.lr.ok .lr-s{color:var(--cheap)}.lr.ok .lr-s i{background:var(--cheap)}
+.lr.ow .lr-s{color:var(--mid)}.lr.ow .lr-s i{background:var(--mid)}
+.lr.short .lr-s{color:var(--ink2)}.lr.short .lr-s i{background:var(--none)}
+.lr-d{display:flex;flex-wrap:wrap;gap:6px}
+.mchip{display:inline-flex;align-items:center;gap:8px;padding:6px 10px 6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font:700 13px var(--sans);cursor:pointer;transition:border-color .12s,transform .12s,box-shadow .12s}
+.mchip:hover{border-color:var(--route);transform:translateY(-1px);box-shadow:var(--e1)}
+.mchip code{font:600 11px var(--dot);color:var(--route);letter-spacing:.05em}
+.mchip small{font:500 11px var(--dot);color:var(--ink2)}
+.mchip.best{border-color:var(--cheap);box-shadow:inset 0 0 0 1px var(--cheap)}
+.mchip .bst{font:700 10px/1 var(--sans);color:#fff;background:var(--cheap);padding:3px 5px;border-radius:3px}
+.lr.short .mchip{background:transparent}
+.mi .fine{margin:18px 0 0;font-size:12px;color:var(--ink2);max-width:75ch}
+@media (max-width:1100px){.msum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:820px){.lr{grid-template-columns:minmax(0,1fr) auto}.lr-d{grid-column:1/-1}.rw-zl{display:none}.runway{margin-inline:4px}}
+.fine{color:var(--ink2);font-size:12px;margin:14px 0 0;max-width:900px}
+footer.site{border-top:1px solid var(--line);padding-block:20px 40px;color:var(--ink2);font-size:12px}
+footer.site .wrap{display:grid;gap:6px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--navy);color:var(--onnavy);border-left:4px solid var(--route);padding:11px 18px;border-radius:8px;font:500 13px var(--sans);opacity:0;pointer-events:none;transition:.25s;z-index:20;max-width:calc(100% - 32px);box-shadow:0 12px 30px -10px rgba(0,0,0,.6)}
+.toast.on{opacity:1;transform:translateX(-50%)}
+
+@media (max-width:1100px){
+  .hero .wrap,.addbox{grid-template-columns:minmax(0,1fr)}
+  .atlas .wrap{grid-template-columns:minmax(0,1fr);grid-template-areas:"map" "pass" "board"}
+  .pass{position:static;max-height:none;overflow:visible}
+  .stat{text-align:left}
+}
+@media (max-width:1320px){
+  .bhead .c4,.brow .c4,.bhead .c8,.brow .c8{display:none}
+  .bhead,.brow{grid-template-columns:28px 30px minmax(130px,1.4fr) 80px minmax(126px,1fr) minmax(100px,.8fr)}
+  .bname .rmk-in{display:inline-block}
+}
+@media (max-width:820px){
+  .bhead,.brow{grid-template-columns:24px minmax(0,1fr) 98px 74px;gap:0 8px;padding-inline:10px}
+  .bhead .c2,.brow .c2,.bhead .c3,.brow .c3{display:none}
+  .mcode{display:inline}.bname small{padding-left:17px}
+  .bname .rmk-in,.bname .rg{display:none}.rmk-sm{display:inline}
+  .bpr b{font-size:15px}.bmi b{font-size:13px}.pbar{max-width:90px}.mbar{max-width:70px}
+  .bt-en{font-size:14px;letter-spacing:.22em}.bclock{font-size:14px}.bt-ja{display:none}
+}
+@media (max-width:480px){.two{grid-template-columns:1fr}.wrap{padding-inline:16px}.addbox,.milebox{padding:16px}}
+
+/* numerals & Latin: clean tabular faces (Inter for text, IBM Plex Mono for codes/prices) */
+body{font-feature-settings:"tnum" 1,"lnum" 1;font-variant-numeric:tabular-nums lining-nums}
+.cd b,.mini .v,.bcode,.chain,.edchain,.sugg b,.bn{font-weight:600;font-variant-numeric:tabular-nums lining-nums}
+.cd b{letter-spacing:.02em}
+.chain .ap,.bcode,.sugg b{letter-spacing:.04em}
+.eyebrow,.cap,.lbl,.pass-h,.bhead,.bfoot,.brand small,.stat,.keys .cap{font-weight:500}
+.mini .v{font-size:20px}
+
+/* layover finder & live-search links */
+.lay{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+.lay-list{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:5px}
+.lay-list li{display:grid;grid-template-columns:44px minmax(0,1fr);align-items:center;gap:4px 8px;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+.lay-list li.pv{border-color:var(--accent);background:var(--accent-soft)}
+.lay-list b{font:600 14px var(--dot);letter-spacing:.04em}
+.lay-list span{min-width:0;overflow-wrap:anywhere;font-size:13px}
+.lay-list small{display:block;color:var(--ink2);font-size:11.5px}
+.lay-act{grid-column:2;display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+.det{display:inline-block;font:600 11px/1 var(--dot);padding:3px 6px;border-radius:4px;border:1px solid var(--cheap);color:var(--cheap);margin-left:6px}
+.det.m{border-color:var(--mid);color:var(--mid)}
+.det.h{border-color:var(--high);color:var(--high)}
+.srch{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)}
+.srch .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+.srch label{font-size:11.5px;color:var(--ink2);display:grid;gap:2px}
+.srch .field{padding:6px 8px;font-size:13px}
+.srch a.key{text-decoration:none}
+.srch .fine{font-size:11.5px;color:var(--ink2);margin:6px 0 0}
+
+/* ================= v7: night hero + globe ================= */
+.hero{position:relative;overflow:hidden;padding-block:40px 38px;color:var(--m-ink);
+  background:
+    radial-gradient(60% 90% at 78% 50%,rgba(40,110,160,.28),transparent 70%),
+    radial-gradient(rgba(140,190,220,.10) 1px,transparent 1.3px) 0 0/22px 22px,
+    linear-gradient(180deg,#0A1622,#050B11 85%);
+  border-bottom:1px solid #000}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(var(--route-rgb),.7),transparent)}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,540px);gap:28px 40px;align-items:center}
+.hero .eyebrow{color:var(--m-dim);display:flex;align-items:center;gap:8px}
+.hero .eyebrow .live{width:7px;height:7px;border-radius:50%;background:var(--led);box-shadow:0 0 10px var(--led);animation:blink 2.2s ease-in-out infinite}
+.hero h1{color:#F4F8FA;font-size:clamp(36px,5vw,66px);letter-spacing:.03em;margin:12px 0 14px}
+.hero h1 em{color:var(--route);text-shadow:0 0 28px rgba(var(--route-rgb),.55)}
+.hero .lead{color:#9DB3C3;max-width:34em}
+.hero .keys .cap{color:var(--m-dim)}
+.hero .key:not([aria-pressed="true"]):not(.go){color:#DCE8EE;border-color:#01060a;background:linear-gradient(180deg,#1F374B,#11263A);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 1px 1px rgba(0,0,0,.4)}
+.hero .key small{opacity:.65}
+.hkpi{display:grid;width:fit-content;grid-template-columns:repeat(3,minmax(0,auto));justify-content:start;gap:0;margin:4px 0 24px;border:1px solid rgba(140,190,220,.18);border-radius:12px;background:rgba(6,14,22,.55);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);overflow:hidden;max-width:100%}
+.hkpi > *{padding:12px 18px;border-left:1px solid rgba(140,190,220,.14);min-width:0;text-align:left;background:none;border-top:0;border-right:0;border-bottom:0;color:inherit;font:inherit}
+.hkpi > :first-child{border-left:0}
+.hkpi .k{display:block;font:500 10px var(--dot);letter-spacing:.16em;color:var(--m-dim);margin-bottom:6px;white-space:nowrap}
+.hkpi .v{display:flex;align-items:baseline;gap:6px;white-space:nowrap}
+.hkpi .v b{font:600 24px/1 var(--dot);color:#F4F8FA;font-variant-numeric:tabular-nums}
+.hkpi .v small{font:600 12px var(--sans);color:#9DB3C3}
+.hkpi button{cursor:pointer;transition:background .15s}
+.hkpi button:hover{background:rgba(var(--route-rgb),.12)}
+.hkpi button .v b{color:var(--amber)}
+.globe-box{position:relative;width:100%;max-width:540px;justify-self:end;aspect-ratio:1/1}
+.globe-box canvas{display:block;width:100%;height:100%;cursor:grab;touch-action:pan-y}
+.globe-box canvas.drag{cursor:grabbing}
+.globe-cap{position:absolute;left:0;right:0;bottom:2%;text-align:center;font:500 10px var(--dot);letter-spacing:.16em;color:var(--m-dim);pointer-events:none}
+.globe-cap b{color:var(--m-ink);font-weight:600}
+@media (max-width:1100px){.hero .wrap{grid-template-columns:minmax(0,1fr)}.globe-box{justify-self:center;max-width:420px}}
+@media (max-width:640px){.hkpi{width:auto;grid-template-columns:repeat(3,minmax(0,1fr))}.hkpi > *{padding:10px 10px}.hkpi .v b{font-size:18px}.hkpi .k{letter-spacing:.08em}.globe-box{max-width:330px}}
+
+/* brand globe spins */
+.brand svg .mer{transform-origin:16px 16px}
+
+/* miles ticket now lives in the miles section */
+.mtop{display:grid;grid-template-columns:minmax(280px,380px) minmax(0,1fr);gap:18px 32px;align-items:center;padding-bottom:20px;border-bottom:1px dashed var(--line)}
+.mtop .miles-tk{background:var(--paper);box-shadow:inset 0 1px 0 var(--key-hi),var(--e1)}
+.mtop .miles-tk::before,.mtop .miles-tk::after{background:var(--panel)}
+.mtop .msum{grid-template-columns:repeat(3,minmax(0,1fr));padding-bottom:0;border-bottom:0}
+@media (max-width:1100px){.mtop{grid-template-columns:minmax(0,1fr)}.mtop .msum{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){.mtop .msum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ================= v7: boarding pass ================= */
+.pass{overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.pass-h{position:sticky;top:0;z-index:2;background:
+  repeating-linear-gradient(115deg,rgba(255,255,255,.035) 0 2px,transparent 2px 9px),
+  linear-gradient(90deg,#0B1D2E,#163A57);padding:11px 18px;border-bottom:3px solid var(--route)}
+.pass-h .ph-l{display:flex;align-items:center;gap:9px}
+.pass-h .ph-l svg{width:16px;height:16px;color:var(--route)}
+.codes{grid-template-columns:auto minmax(0,1fr) auto;gap:12px;margin-top:2px}
+.cd b{font-size:clamp(38px,3.6vw,48px);letter-spacing:.04em;line-height:.95}
+.fline{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;color:var(--route);position:relative;padding-bottom:18px}
+.fline i{height:0;border-top:2px dotted color-mix(in srgb,var(--route) 70%,transparent)}
+.fline svg{width:26px;height:26px}
+.fline small{position:absolute;left:0;right:0;bottom:0;text-align:center;font:600 11px var(--dot);color:var(--ink2);letter-spacing:.04em;white-space:nowrap}
+.pfields{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:14px 0 2px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--paper)}
+.pfields div{padding:8px 10px;border-left:1px solid var(--line);min-width:0}
+.pfields div:first-child{border-left:0}
+.pfields dt{font:500 9.5px var(--dot);letter-spacing:.14em;color:var(--ink2)}
+.pfields dd{margin:3px 0 0;font:600 13px var(--dot);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tbox{margin:0 -18px;padding:14px 18px 16px;background:var(--board);background-image:var(--grain);color:var(--bink)}
+.tbox .cap{color:var(--bdim)}
+.tbox .flap i{background:linear-gradient(180deg,#232B33 0 50%,#171D23 50% 100%)}
+.tbox .flap i.s{background:none;color:#C9D6DF}
+.tbox .tmeta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font:500 11.5px var(--sans);color:var(--bdim)}
+.tbox .tmeta b{color:var(--bink);font-weight:600}
+.tbox .tmeta a{color:#8EC2FF}
+.bcode-strip{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;margin-top:16px;padding-top:14px;border-top:2px dashed var(--line)}
+.bcode-strip svg{height:42px;width:170px;color:var(--ink)}
+.bcode-strip span{font:500 10.5px/1.6 var(--dot);letter-spacing:.12em;color:var(--ink2)}
+.bcode-strip span b{color:var(--ink);font-weight:600}
+
+/* season fare cards */
+.fares{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fare{position:relative;border:1px solid var(--line);border-top:3px solid var(--sc);border-radius:10px;padding:11px 12px 12px;background:var(--paper);min-width:0}
+.fare.spring{--sc:var(--spring)}.fare.summer{--sc:var(--summer)}
+.fare .fh{display:flex;align-items:baseline;justify-content:space-between;gap:6px}
+.fare .fh b{font:800 14px var(--serif);color:var(--sc)}
+.fare .fh span{font:500 10.5px var(--dot);color:var(--ink2);letter-spacing:.06em}
+.fare .fv{font:600 22px/1.15 var(--dot);margin:6px 0 2px;font-variant-numeric:tabular-nums}
+.fare .fd{display:inline-block;font:700 10.5px/1 var(--sans);padding:4px 6px;border-radius:4px;margin-bottom:8px}
+.fare .fd.up{color:var(--high);background:color-mix(in srgb,var(--high) 12%,transparent)}
+.fare .fd.dn{color:var(--cheap);background:color-mix(in srgb,var(--cheap) 12%,transparent)}
+.frange{position:relative;height:6px;border-radius:3px;background:color-mix(in srgb,var(--ink2) 16%,transparent);margin:6px 0 4px}
+.frange .band{position:absolute;top:0;bottom:0;border-radius:3px;background:color-mix(in srgb,var(--sc) 55%,transparent)}
+.frange .mk{position:absolute;top:50%;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:var(--sc);border:2px solid var(--paper);box-shadow:0 0 0 1px var(--sc)}
+.frange .td{position:absolute;top:-4px;bottom:-4px;width:2px;margin-left:-1px;background:var(--ink)}
+.flab{display:flex;justify-content:space-between;font:500 10px var(--dot);color:var(--ink2)}
+.fare .fw{font:600 12px var(--sans);margin:8px 0 0;color:var(--ink)}
+.fare details{margin-top:6px}
+.fare summary{cursor:pointer;font:600 11px var(--sans);color:var(--ink2);list-style:none}
+.fare summary::before{content:"＋ ";color:var(--sc)}
+.fare details[open] summary::before{content:"− "}
+.fare details p{margin:4px 0 0;font-size:11.5px;color:var(--ink2);line-height:1.6}
+.fare .empty{margin-top:8px}
+.flegend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font:500 10.5px var(--sans);color:var(--ink2)}
+.flegend i{display:inline-block;width:10px;height:2px;background:var(--ink);vertical-align:middle;margin-right:5px}
+@media (max-width:480px){.fares{grid-template-columns:1fr}.pfields{grid-template-columns:repeat(2,minmax(0,1fr))}.pfields div:nth-child(3){border-left:0}.pfields div:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (prefers-reduced-motion:reduce){.hero .eyebrow .live{animation:none}}
+/* v8: mobile polish */
+.fold>summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.fold>summary::-webkit-details-marker{display:none}
+.fold>summary::after{content:'+';font:600 15px/1 var(--dot);color:var(--route)}
+.fold[open]>summary::after{content:'\2212'}
+@media (min-width:641px){.fold>summary{pointer-events:none}.fold>summary::after{display:none}}
+@media (max-width:640px){
+  .mast{position:sticky;top:0;z-index:50}
+  .mast .wrap{gap:6px 16px;padding-block:8px}
+  .brand svg{width:30px;height:30px}.brand b{font-size:19px}.brand small{margin-top:3px}
+  .mast .stat{display:none}
+  .nav{flex-wrap:nowrap;overflow-x:auto;gap:18px;width:100%;scrollbar-width:none}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{white-space:nowrap;padding:4px 0}
+  html{scroll-padding-top:84px}
+  .hero .keys{flex-wrap:nowrap;overflow-x:auto;margin-inline:-16px;padding:2px 16px 8px;scrollbar-width:none}
+  .hero .keys::-webkit-scrollbar{display:none}
+  .hero .keys .key{flex:none;white-space:nowrap}
+  #modeKeys,#filtKeys{flex-wrap:nowrap;gap:8px 10px}
+  .hero .keys .cap{flex:none}
+}
+
+.brand svg .mer{animation:mer 6s ease-in-out infinite}
+.brand svg .mer.m2{animation-delay:-2s}.brand svg .mer.m3{animation-delay:-4s}
+@keyframes mer{from{transform:scaleX(-1)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.brand svg .mer{animation:none;transform:scaleX(.45)}}
+.hkpi .v{flex-wrap:wrap}
+.tbox .kv dt{color:var(--bdim)}.tbox .kv dd{color:var(--bink)}.tbox .kv a{color:#8EC2FF}.tbox .empty{color:var(--bdim)}
+</style>
+
+<header class="mast">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="旅ナビ トップ">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="1.7"/><path class="mer" d="M16 3A13 13 0 0 1 16 29" fill="none" stroke="currentColor" stroke-width="1.2"/><path class="mer m2" d="M16 3A13 13 0 0 1 16 29" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".75"/><path class="mer m3" d="M16 3A13 13 0 0 1 16 29" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".5"/><path d="M3.2 16h25.6" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 24.5Q15 5 27.5 9" fill="none" stroke="#E8621A" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0.5 4"/></svg>
+      <span><b>旅ナビ</b><small>TABI NAVI · NGO</small></span>
+    </a>
+    <nav class="nav" aria-label="ページ内メニュー">
+      <a href="#map">航空マップ</a><a href="#board">発着案内</a><a href="#add">行き先を追加</a><a href="#miles">マイル</a>
+    </nav>
+    <div class="stat" id="meta">読み込み中…</div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-txt">
+        <div class="eyebrow"><span class="live"></span>NAGOYA CHUBU (NGO) 発 · 航空ルートと運賃</div>
+        <h1>次は、<em>どこ</em>へ飛ぶ。</h1>
+        <p class="lead">気になる行き先にピンを立てて、ルートと運賃を毎朝更新。春休み・夏休みの狙い目と、手持ちのマイルで行けるかまで、ひと目で確かめられます。</p>
+        <div class="hkpi" id="hkpi"></div>
+        <div class="keys" role="group" aria-label="表示する価格"><span class="cap">PRICE</span><span id="modeKeys" class="keys"></span></div>
+        <div class="keys" role="group" aria-label="行き先の絞り込み"><span class="cap">FILTER</span><span id="filtKeys" class="keys"></span></div>
+      </div>
+      <div class="globe-box">
+        <canvas id="globe" role="img" aria-label="名古屋から各行き先への航路を描いた、回転する地球儀"></canvas>
+        <div class="globe-cap" aria-hidden="true">DRAG TO ROTATE · <b>点をタップで選択</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="atlas" id="map">
+    <div class="wrap">
+      <div class="mapwrap">
+        <svg id="map-svg" viewBox="0 8 1000 440" role="img" aria-label="世界地図と行き先のピン">
+          <defs>
+            <radialGradient id="seaG" cx="58%" cy="42%" r="72%"><stop offset="0" style="stop-color:var(--m-sea)"/><stop offset="1" style="stop-color:var(--m-sea2)"/></radialGradient>
+            <pattern id="dotP" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="1.6" cy="1.6" r=".92" style="fill:var(--m-dot)"/></pattern>
+            <filter id="glow" x="-10%" y="-30%" width="120%" height="160%"><feGaussianBlur stdDeviation="2.4"/></filter>
+            <path id="landP" d="%%LAND%%"/>
+          </defs>
+          <path class="sphere" d="%%SPHERE%%" fill="url(#seaG)"/>
+          <path class="grat" d="%%GRAT%%"/>
+          <use class="land-base" href="#landP"/>
+          <use class="land" href="#landP"/>
+          <g id="rings"></g>
+          <g id="routes"></g><g id="pins"></g><g id="home"></g>
+        </svg>
+        <div class="hud" aria-hidden="true"><div><span class="live"></span>ORIGIN <b>NGO</b> <span id="hudLL"></span></div><div>RINGS 2,000 · 5,000 · 10,000 KM</div><div>DEST <b id="hudN">—</b> · <span id="hudM"></span></div></div>
+        <div class="pickbar" id="pickbar">地図をクリックして、追加したい場所を指定してください</div>
+        <div class="tools">
+          <button type="button" class="key" id="zin" aria-label="拡大">+</button>
+          <button type="button" class="key" id="zout" aria-label="縮小">−</button>
+          <button type="button" class="key" id="zreset" aria-label="全体表示" style="font-size:11px">全体</button>
+        </div>
+        <div class="legend" id="legend"></div>
+        <div class="state" id="state"></div>
+      </div>
+      <aside class="pass" id="pass" aria-live="polite"></aside>
+      <div class="bdw" id="board">
+      <div class="sec-h"><h2>発着案内</h2><p id="boardNote">行を選ぶと地図とチケットが切り替わります。左端のチェックで比較(最大3件)にも追加できます。</p></div>
+      <div class="board-tools">
+        <div class="bq"><input class="field" id="boardQ" type="search" placeholder="行き先・国・地域で絞り込み…" autocomplete="off" aria-label="発着案内をキーワードで絞り込み"></div>
+        <select class="field" id="boardSort" aria-label="並び替え">
+          <option value="price">価格が安い順</option>
+          <option value="name">名前順</option>
+          <option value="region">地域別</option>
+        </select>
+      </div>
+      <div class="board">
+        <div class="btop"><div class="bt-l"><span class="bt-en">DEPARTURES</span><span class="bt-ja">出発 · 中部国際空港 セントレア</span></div><div class="bt-r"><span class="bclock" id="bclock">--:--:--</span><span class="bt-z">JST</span></div></div>
+        <div class="bhead"><span class="bcmp-h" aria-hidden="true">比</span><span class="c2">NO</span><span>行き先</span><span class="c3">CODE</span><span class="c4">経路 · 距離</span><span class="r" id="bhPrice">運賃</span><span class="r">マイル</span><span class="c8 r">備考</span></div>
+        <div id="brows"></div>
+        <div class="bfoot" id="bfoot"></div>
+      </div>
+      <div class="cmpwrap" id="cmpwrap" hidden>
+        <div class="cmp-h"><h3>比較 <span>(<span id="cmpN">0</span>/3)</span></h3><button type="button" class="key sm" id="cmpClear">クリアする</button></div>
+        <div id="cmpTable"></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="add" id="add">
+    <div class="wrap">
+      <div class="sec-h"><h2>行き先を追加</h2><p>名前を入れるか、地図をクリックするだけ。経由地はチケット上で編集できます。</p></div>
+      <div class="addbox">
+        <div>
+          <h3>名前・空港コードで探す</h3>
+          <p>都市名・国名・空港コードのどれでも探せます(例: リスボン / ポルトガル / LIS)。</p>
+          <input class="field" id="addq" type="search" placeholder="行き先を入力…" autocomplete="off" aria-label="行き先を検索">
+          <div class="rowsel"><span class="cap" style="margin:0">追加後の扱い</span><span id="addStatus" class="keys"></span></div>
+          <ul class="sugg" id="addres"></ul>
+          <div class="rowsel" style="margin-top:14px"><button type="button" class="key go" id="pickBtn">地図をクリックして追加</button><span id="ownerNote" class="dsub"></span></div>
+        </div>
+        <div class="how">
+          <div><span><b>行き先を選ぶ</b>検索結果から選ぶか、地図上で場所をクリック。近い空港を自動で候補に出します。</span></div>
+          <div><span><b>経路を整える</b>チケットの「経路を編集」で乗継地を追加。複数の経路を並べて比べられます。</span></div>
+          <div><span><b>価格は毎朝6時に更新</b>追加した行き先も、翌朝から自動で運賃とホテルの探索対象になります。</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mi" id="miles">
+    <div class="wrap">
+      <div class="sec-h"><h2>マイルで行ける範囲</h2><p id="milesNote"></p></div>
+      <div class="milebox">
+        <div class="mtop"><div class="miles-tk" id="milesTk"></div><div class="msum" id="msum"></div></div>
+        <div class="runway" id="runway"></div>
+        <div class="ladder" id="ladder"></div>
+        <p class="fine">必要マイルは、JAL公式「国際線特典航空券 必要マイル数」の日本発着・片道・エコノミー(基本マイル数)を2倍した往復の目安です(公式表 2026年4月16日更新分)。基本マイル数の席が取れない場合は追加マイルが必要になり、いずれも燃油特別付加運賃・税金・手数料は別にかかります。JAL便がない行き先は、提携航空会社の特典で別途検討します。</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>価格は公開ページに載っている運賃・宿泊料金の目安です(1名・エコノミー往復・ホテルは1名1泊)。運賃は日々変わるため、予約前に必ず公式サイトで再確認してください。</div>
+    <div>ルートは「想定」表記のものは実際のダイヤ確認前の目安です。データは毎朝6時ごろの自動探索で書き換わります。</div>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+'use strict';
+var NS='http://www.w3.org/2000/svg';
+var K=%%K%%, TX=%%TX%%, TY=%%TY%%, CENTER=155;
+var A1=1.340264,A2=-0.081106,A3=0.000893,A4=0.003796,M=Math.sqrt(3)/2;
+function project(lon,lat){
+  var l=(((lon-CENTER+540)%360)-180)*Math.PI/180,p=lat*Math.PI/180;
+  var t=Math.asin(M*Math.sin(p)),t2=t*t,t6=t2*t2*t2;
+  var x=l*Math.cos(t)/(M*(A1+3*A2*t2+t6*(7*A3+9*A4*t2)));
+  var y=t*(A1+A2*t2+t6*(A3+A4*t2));
+  return [TX+K*x,TY-K*y];
+}
+function unproject(x,y){
+  var X=(x-TX)/K,Y=-(y-TY)/K,t=Y,i,t2,t6;
+  for(i=0;i<14;i++){t2=t*t;t6=t2*t2*t2;t-=(t*(A1+A2*t2+t6*(A3+A4*t2))-Y)/(A1+3*A2*t2+t6*(7*A3+9*A4*t2));}
+  t2=t*t;t6=t2*t2*t2;
+  var s=Math.sin(t)/M;if(!isFinite(s)||Math.abs(s)>1)return null;
+  var l=X*M*(A1+3*A2*t2+t6*(7*A3+9*A4*t2))/Math.cos(t);
+  if(!isFinite(l)||Math.abs(l)>Math.PI)return null;
+  var lon=l*180/Math.PI+CENTER;lon=((lon+540)%360)-180;
+  return [lon,Math.asin(s)*180/Math.PI];
+}
+function km(a,b){var R=6371,r=Math.PI/180,dl=(b.lon-a.lon)*r,dp=(b.lat-a.lat)*r;
+  var h=Math.sin(dp/2)*Math.sin(dp/2)+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dl/2)*Math.sin(dl/2);return 2*R*Math.asin(Math.sqrt(h));}
+
+var AP_RAW=`%%AIRPORTS%%`;
+var AIRPORTS=AP_RAW.trim().split('\n').map(function(l){var a=l.split('|');return{code:a[0],name:a[1],en:a[2],country:a[3],lon:+a[4],lat:+a[5],region:a[6]};});
+var APMAP={};AIRPORTS.forEach(function(a){APMAP[a.code]=a;});
+var NGO=APMAP.NGO;
+var HUBS=['ICN','TPE','HKG','SIN','BKK','KUL','HND','NRT','KIX','DOH','DXB','IST','HEL','FRA','LHR','CDG','AMS','SFO','LAX','SEA','HNL','MNL'];
+var VB0={x:0,y:8,w:1000,h:440};
+
+/* ---------- helpers ---------- */
+function h(tag,props){
+  var kids=Array.prototype.slice.call(arguments,2),svg=tag.indexOf('svg:')===0;
+  var e=svg?document.createElementNS(NS,tag.slice(4)):document.createElement(tag);
+  if(props){for(var k in props){var v=props[k];if(v==null||v===false)continue;
+    if(k==='class')e.setAttribute('class',v);
+    else if(k.slice(0,2)==='on')e.addEventListener(k.slice(2),v);
+    else e.setAttribute(k,v===true?'':v);}}
+  (function add(list){list.forEach(function(c){if(c==null||c===false)return;if(Array.isArray(c))return add(c);e.append(c.nodeType?c:document.createTextNode(String(c)));});})(kids);
+  return e;
+}
+function $(id){return document.getElementById(id);}
+function clear(el){while(el.firstChild)el.removeChild(el.firstChild);}
+function num(v){return typeof v==='number'&&isFinite(v)?v:null;}
+function yen(n){return n==null?'—':'¥'+Math.round(n).toLocaleString('ja-JP');}
+function man(n){if(n==null)return '';if(n>=10000){return (n/10000).toFixed(n>=100000?0:1).replace(/\.0$/,'')+'万';}return String(Math.round(n));}
+function fmtDate(iso,t){var ms=Date.parse(iso);if(!isFinite(ms))return '';var o={timeZone:'Asia/Tokyo',month:'numeric',day:'numeric'};if(t){o.hour='2-digit';o.minute='2-digit';o.hour12=false;}return new Intl.DateTimeFormat('ja-JP',o).format(new Date(ms));}
+function ageDays(iso){var t=Date.parse(iso);return isFinite(t)?(Date.now()-t)/864e5:null;}
+function safeUrl(u){return typeof u==='string'&&/^https:\/\//.test(u)?u:null;}
+var CONF={high:'確度 高',mid:'確度 中',low:'確度 低'};
+function flap(text,fs,cls){
+  var w=h('span',{class:'flap'+(cls?' '+cls:''),style:'--fs:'+fs+'px','aria-label':text});
+  var n=0;String(text).split('').forEach(function(c){var sep=/[,¥\s.]/.test(c);w.append(h('i',{class:sep?'s':'',style:'--i:'+(n++),'aria-hidden':'true'},c));});
+  return w;
+}
+var toastT=null;
+function toast(msg){var t=$('toast');t.textContent=msg;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('on');},3800);}
+
+var MODES={
+  today:{label:'今日の最安',sub:'',head:'今日の最安',flight:function(d){return num(d.today&&d.today.flight&&d.today.flight.price);},hotel:function(d){return num(d.today&&d.today.hotel&&d.today.hotel.price);}},
+  spring:{label:'春休み',sub:'2〜3月',head:'春休みの目安',flight:function(d){return num(d.spring&&d.spring.flight&&d.spring.flight.rec);},hotel:function(d){return num(d.spring&&d.spring.hotel&&d.spring.hotel.price);}},
+  summer:{label:'夏休み',sub:'8〜9月',head:'夏休みの目安',flight:function(d){return num(d.summer&&d.summer.flight&&d.summer.flight.rec);},hotel:function(d){return num(d.summer&&d.summer.hotel&&d.summer.hotel.price);}}
+};
+var FILTERS={all:'すべて',wish:'選別済み',cand:'未選別',miles:'マイルで行ける'};
+
+/* ---------- state ---------- */
+var db=null,canEdit=false;
+var dests=new Map(),meta=null,miles={balance:0,asOf:null,card:'JALカードNavi'};
+var mode='today',filt='all',sel=null,optSel={},tier={t1:0,t2:0,n:0};
+var view={x:VB0.x,y:VB0.y,w:VB0.w},moved=false;
+var addStatus='wish',addQuery='',addMode=false,pickNear=null,editMile=false,edit=null,confirmDel=null,confirmT=null;
+var boardQ='',sortKey='price',cmp=[];
+
+var prevVia=null; /* {id, code}: layover preview drawn on the map (view only, not saved) */
+function isoDay(off){var t=new Date(Date.now()+off*864e5+9*36e5);return t.toISOString().slice(0,10);}
+var sd={o:'NGO',dep:isoDay(60),ret:isoDay(67)};
+try{var _s=JSON.parse(localStorage.getItem('tabinavi.search')||'null');if(_s&&typeof _s==='object'){
+  if(/^[A-Z]{3}$/.test(_s.o||''))sd.o=_s.o;
+  if(/^\d{4}-\d\d-\d\d$/.test(_s.dep||'')&&_s.dep>=isoDay(0))sd.dep=_s.dep;
+  if(/^\d{4}-\d\d-\d\d$/.test(_s.ret||'')||_s.ret==='')sd.ret=_s.ret;}}catch(_){}
+function saveSd(){try{localStorage.setItem('tabinavi.search',JSON.stringify(sd));}catch(_){}}
+var SEARCH_ORIGINS=[['NGO','名古屋 NGO'],['KIX','関西 KIX'],['HND','羽田 HND'],['NRT','成田 NRT']];
+function ymd6(s){return s.slice(2,4)+s.slice(5,7)+s.slice(8,10);}
+function skyUrl(d){
+  var u='https://www.skyscanner.jp/transport/flights/'+sd.o.toLowerCase()+'/'+String(d.iata||'').toLowerCase()+'/';
+  if(sd.dep){u+=ymd6(sd.dep)+'/';if(sd.ret&&sd.ret>sd.dep)u+=ymd6(sd.ret)+'/';}
+  return u+'?adultsv2=1&cabinclass=economy&currency=JPY&locale=ja-JP&market=JP';
+}
+function tripUrl(d){
+  var rt=sd.ret&&sd.dep&&sd.ret>sd.dep;
+  return 'https://jp.trip.com/flights/showfarefirst?dcity='+sd.o.toLowerCase()+'&acity='+encodeURIComponent(String(d.iata||'').toLowerCase())+
+    (sd.dep?'&ddate='+sd.dep:'')+(rt?'&rdate='+sd.ret:'')+'&triptype='+(rt?'rt':'ow')+'&class=y&quantity=1&locale=ja-JP&curr=JPY';
+}
+/* layover candidates: hubs whose NGO->hub->dest detour is small, ranked by detour */
+var LAY_POOL=['ICN','GMP','PUS','TPE','HKG','MFM','SIN','BKK','KUL','MNL','CGK','SGN','HAN','PVG','PEK','CAN','DEL','HND','NRT','KIX','FUK','CTS','DOH','DXB','AUH','IST','HEL','FRA','MUC','ZRH','VIE','AMS','CDG','LHR','FCO','MAD','LIS','CPH','ARN','SFO','LAX','SEA','YVR','JFK','ORD','DFW','HNL','SYD','MEL','AKL','TAS','ALA','ADD','CAI','CMB'];
+function layoverCands(d,r){
+  var used={};((r&&r.via)||[]).forEach(function(v){used[v.code]=1;});
+  var dd=km(NGO,d),out=[];
+  if(!(dd>0))return out;
+  var seen={};
+  LAY_POOL.concat(HUBS).forEach(function(c){
+    if(seen[c])return;seen[c]=1;
+    var a=APMAP[c];if(!a||c===d.iata||c==='NGO'||used[c])return;
+    var a1=km(NGO,a),a2=km(a,d);
+    if(a2<Math.max(400,dd*0.12))return;           /* hub next to the destination is pointless */
+    var jp=(a.country==='日本');
+    if(!jp&&a1<400)return;
+    var ratio=(a1+a2)/dd-1;                        /* detour beyond the straight line */
+    if(ratio>0.45)return;
+    if(a1>dd*1.02)return;                          /* hub beyond the destination */
+    out.push({a:a,ratio:ratio,a1:a1,a2:a2,jp:jp});
+  });
+  out.sort(function(x,y){return x.ratio-y.ratio;});
+  /* keep variety: at most 2 hubs per region, so Asian / Middle-East / European gateways all show up */
+  var cnt={},pick=[];
+  out.forEach(function(x){var g=x.a.region||'';cnt[g]=(cnt[g]||0)+1;if(cnt[g]<=2)pick.push(x);});
+  return pick.slice(0,8);
+}
+var elMap=$('map-svg'),gRoutes=$('routes'),gPins=$('pins'),gHome=$('home');
+
+/* ---------- data helpers ---------- */
+function getRoutes(d){
+  if(Array.isArray(d.routes)&&d.routes.length)return d.routes;
+  return [d.route||{via:[],kind:'',basis:'想定'}];
+}
+function routeLabel(r){var v=(r&&r.via)||[];return v.length?v.map(function(x){return x.code;}).join('・')+'経由':'直行';}
+function mileState(d){
+  var m=d.miles;if(!m||num(m.rt)==null)return {k:'none'};
+  var bal=miles.balance||0;
+  if(m.rt<=bal)return {k:'ok',rt:m.rt};
+  if(num(m.ow)!=null&&m.ow<=bal)return {k:'ow',rt:m.rt,ow:m.ow,short:m.rt-bal};
+  return {k:'short',rt:m.rt,short:m.rt-bal};
+}
+function matchQuery(d,q){
+  q=kata((q||'').trim().toLowerCase());if(!q)return true;
+  var s=[d.name,d.country,d.region,d.iata,d.id].filter(Boolean).join(' ').toLowerCase();
+  return s.indexOf(q)>=0;
+}
+function sortList(list,key){
+  var f=MODES[mode].flight,arr=list.slice();
+  if(key==='name')arr.sort(function(a,b){return (a.name||a.id).localeCompare(b.name||b.id,'ja');});
+  else if(key==='region')arr.sort(function(a,b){return (a.region||'').localeCompare(b.region||'','ja')||(a.name||'').localeCompare(b.name||'','ja');});
+  else arr.sort(function(a,b){var pa=f(a),pb=f(b);if(pa==null&&pb==null)return (a.name||'').localeCompare(b.name||'','ja');if(pa==null)return 1;if(pb==null)return -1;return pa-pb;});
+  return arr;
+}
+function visible(){
+  var out=[];dests.forEach(function(d){
+    if(typeof d.lon!=='number'||typeof d.lat!=='number')return;
+    if(filt==='wish'&&d.status==='cand')return;
+    if(filt==='cand'&&d.status!=='cand')return;
+    if(filt==='miles'&&mileState(d).k!=='ok')return;
+    if(!matchQuery(d,boardQ))return;
+    out.push(d);});
+  return out;
+}
+function computeTiers(list){
+  var ps=list.map(function(d){return MODES[mode].flight(d);}).filter(function(v){return v!=null;}).sort(function(a,b){return a-b;});
+  tier.n=ps.length;if(ps.length>=3){tier.t1=ps[Math.floor((ps.length-1)/3)];tier.t2=ps[Math.floor((ps.length-1)*2/3)];}
+}
+function tierOf(p){if(p==null)return 'none';if(tier.n<3)return 'mid';return p<=tier.t1?'cheap':(p<=tier.t2?'mid':'high');}
+function tc(t){return 'var(--'+t+')';}
+
+/* ---------- geometry ---------- */
+function routePts(d,r){
+  var pts=[project(NGO.lon,NGO.lat)];
+  ((r&&r.via)||[]).forEach(function(v){if(v&&typeof v.lon==='number')pts.push(project(v.lon,v.lat));});
+  pts.push(project(d.lon,d.lat));return pts;
+}
+function arcPath(pts){
+  var s='M'+pts[0][0].toFixed(1)+' '+pts[0][1].toFixed(1);
+  for(var i=1;i<pts.length;i++){
+    var a=pts[i-1],b=pts[i],dx=b[0]-a[0],dy=b[1]-a[1],len=Math.hypot(dx,dy)||1,nx=-dy/len,ny=dx/len;
+    if(ny>0){nx=-nx;ny=-ny;}
+    var lift=Math.min(70,len*0.2);
+    s+=' Q'+((a[0]+b[0])/2+nx*lift).toFixed(1)+' '+((a[1]+b[1])/2+ny*lift).toFixed(1)+' '+b[0].toFixed(1)+' '+b[1].toFixed(1);
+  }
+  return s;
+}
+var PLANE='M0-7L1.7-2.4L7.4 1.2V2.9L1.6 1.5L1.1 5.2L3.2 6.7V7.7L0 6.9L-3.2 7.7V6.7L-1.1 5.2L-1.6 1.5L-7.4 2.9V1.2L-1.7-2.4Z';
+var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+var PLANE_ICON='M21 16v-2l-8-5V3.5A1.5 1.5 0 0 0 11.5 2 1.5 1.5 0 0 0 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z';
+function planeSvg(){return h('svg:svg',{viewBox:'0 0 24 24','aria-hidden':'true'},h('svg:path',{fill:'currentColor',d:PLANE_ICON,transform:'rotate(90 12 12)'}));}
+function flightTime(d,r){
+  var t=String((r&&r.duration)||'').split(/[((]/)[0].trim();if(t)return {v:t,est:false};
+  var k=routeKm(d,r),legs=((r&&r.via)||[]).length+1,hrs=k/790+.45*legs+(legs>1?1.5*(legs-1):0);
+  return {v:'約'+Math.max(1,Math.round(hrs))+'時間',est:true};
+}
+function fareCards(d){
+  var ss=[['spring','春休み','2〜3月'],['summer','夏休み','8〜9月']];
+  var lo=Infinity,hi=-Infinity,today=num(d.today&&d.today.flight&&d.today.flight.price);
+  ss.forEach(function(s){var f=(d[s[0]]||{}).flight||{};[f.low,f.high,f.rec].forEach(function(v){v=num(v);if(v!=null){lo=Math.min(lo,v);hi=Math.max(hi,v);}});});
+  var has=isFinite(lo);
+  if(has&&today!=null){lo=Math.min(lo,today);hi=Math.max(hi,today);}
+  if(has){var pad=(hi-lo)*.08||hi*.05;lo-=pad;hi+=pad;}
+  var pos=function(v){return ((v-lo)/(hi-lo)*100).toFixed(1)+'%';};
+  var wrap=h('div',{class:'fares'});
+  ss.forEach(function(s){
+    var S=d[s[0]]||{},f=S.flight||{},ho=S.hotel||{},rec=num(f.rec),l=num(f.low),hh=num(f.high);
+    var c=h('div',{class:'fare '+s[0]},h('div',{class:'fh'},h('b',null,s[1]),h('span',null,s[2])));
+    if(rec==null&&num(ho.price)==null){c.append(h('p',{class:'empty'},'目安は未取得'));wrap.append(c);return;}
+    c.append(h('div',{class:'fv'},rec!=null?yen(rec):'—'));
+    if(rec!=null&&today!=null&&rec!==today){var df=rec-today;c.append(h('span',{class:'fd '+(df>0?'up':'dn')},df>0?('今日より +'+yen(df)):('今日より −'+yen(-df))));}
+    if(rec!=null&&has){
+      var bar=h('div',{class:'frange'});
+      if(l!=null&&hh!=null)bar.append(h('span',{class:'band',style:'left:'+pos(l)+';width:calc('+pos(hh)+' - '+pos(l)+')'}));
+      if(today!=null)bar.append(h('span',{class:'td',title:'今日の最安 '+yen(today),style:'left:'+pos(today)}));
+      bar.append(h('span',{class:'mk',style:'left:'+pos(rec)}));
+      c.append(bar);
+      if(l!=null&&hh!=null)c.append(h('div',{class:'flab'},h('span',null,yen(l)),h('span',null,yen(hh))));
+    }
+    if(num(ho.price)!=null)c.append(h('p',{class:'fw',style:'font-weight:500;color:var(--ink2)'},'ホテル '+yen(ho.price)+'/泊'));
+    if(S.when)c.append(h('p',{class:'fw'},S.when));
+    if(S.note)c.append(h('details',null,h('summary',null,'根拠データ'),h('p',null,S.note)));
+    wrap.append(c);
+  });
+  var box=h('div',null,wrap);
+  if(has)box.append(h('div',{class:'flegend'},today!=null?h('span',null,h('i'),'黒線 = 今日の最安'):null,h('span',null,'帯 = 相場の幅 · ● = おすすめ目安')));
+  return box;
+}
+function barcodeEl(d){
+  var seed=7,s=String(d.id)+'|'+(d.iata||'');for(var i=0;i<s.length;i++)seed=(seed*31+s.charCodeAt(i))>>>0;
+  var code='TN'+String(seed%100000).padStart(5,'0');
+  var rnd=function(){seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
+  var svg=h('svg:svg',{viewBox:'0 0 170 42',preserveAspectRatio:'none','aria-hidden':'true'}),x=0;
+  while(x<170){var w=1+Math.floor(rnd()*3.2);if(rnd()>.36)svg.append(h('svg:rect',{x:String(x),y:'0',width:String(Math.min(w,170-x)),height:'42',fill:'currentColor'}));x+=w+1;}
+  return h('div',{class:'bcode-strip'},svg,h('span',null,h('b',null,'NGO → '+(d.iata||'---')),h('br'),'SEQ '+code+' · ECONOMY',h('br'),'TABI NAVI · 目安の搭乗券'));
+}
+
+/* ---------- hero globe (canvas, orthographic, dot-matrix land) ---------- */
+var GLOBE_RAW=`%%GLOBE%%`;
+var Globe=(function(){
+  var cv=document.getElementById('globe');if(!cv||!cv.getContext)return null;
+  var ctx=cv.getContext('2d');if(!ctx)return null;
+  var D2R=Math.PI/180,pts=[],i;
+  for(i=0;i+4<=GLOBE_RAW.length;i+=4){
+    var v=parseInt(GLOBE_RAW.substr(i,4),36),la=(Math.floor(v/721)/2-90)*D2R,lo=((v%721)/2-180)*D2R,cl=Math.cos(la);
+    pts.push(cl*Math.cos(lo),cl*Math.sin(lo),Math.sin(la));
+  }
+  var N=pts.length/3;
+  function css(n,fb){try{var s=getComputedStyle(document.documentElement).getPropertyValue(n).trim();return s||fb;}catch(_){return fb;}}
+  var COL={cheap:css('--m-cheap','#3FC38B'),mid:css('--m-mid','#E3AE2B'),high:css('--m-high','#EE7A66'),none:css('--m-none','#6F8595'),route:'#FF7A2E',dot:'#86B3CF'};
+  var rot={lon:NGO.lon+18,lat:24},tgt=null,spin=reduce?0:-6,idleUntil=0;
+  var W=0,H=0,R=0,cx=0,cy=0,dpr=1,onScreen=true,raf=0,lastT=0,drag=null,moved=false;
+  var arcs=[],selId=null,home=vec(NGO.lon,NGO.lat);
+  function vec(lon,lat){var cl=Math.cos(lat*D2R);return [cl*Math.cos(lon*D2R),cl*Math.sin(lon*D2R),Math.sin(lat*D2R)];}
+  function mat(){var l=rot.lon*D2R,p=rot.lat*D2R,sl=Math.sin(l),cl=Math.cos(l),sp=Math.sin(p),cp=Math.cos(p);
+    return [-sl,cl,0, -sp*cl,-sp*sl,cp, cp*cl,cp*sl,sp];}
+  function pj(m,x,y,z){return [m[0]*x+m[1]*y+m[2]*z, m[3]*x+m[4]*y+m[5]*z, m[6]*x+m[7]*y+m[8]*z];}
+  function slerp(a,b,t){
+    var d=Math.acos(Math.max(-1,Math.min(1,a[0]*b[0]+a[1]*b[1]+a[2]*b[2])));
+    if(d<1e-6)return a.slice();
+    var s=Math.sin(d),k1=Math.sin((1-t)*d)/s,k2=Math.sin(t*d)/s;
+    return [a[0]*k1+b[0]*k2,a[1]*k1+b[1]*k2,a[2]*k1+b[2]*k2];
+  }
+  function buildArc(d){
+    var b=vec(d.lon,d.lat),ang=Math.acos(Math.max(-1,Math.min(1,home[0]*b[0]+home[1]*b[1]+home[2]*b[2])));
+    var n=Math.max(16,Math.round(ang*40)),hmax=.035+.15*ang/Math.PI,p=[];
+    for(var k=0;k<=n;k++){var t=k/n,q=slerp(home,b,t),s=1+hmax*Math.sin(Math.PI*t);p.push(q[0]*s,q[1]*s,q[2]*s);}
+    return p;
+  }
+  function size(){
+    var r=cv.getBoundingClientRect();if(!r.width)return;
+    dpr=Math.min(2,window.devicePixelRatio||1);W=r.width;H=r.height;
+    cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);R=Math.min(W,H)*.40;cx=W/2;cy=H*.48;
+  }
+  function occl(q){return q[2]<0&&(q[0]*q[0]+q[1]*q[1])<1;}
+  function draw(now){
+    if(!W)size();if(!W)return;
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    var m=mat(),g;
+    /* atmosphere */
+    g=ctx.createRadialGradient(cx,cy,R*.92,cx,cy,R*1.28);g.addColorStop(0,'rgba(90,170,230,.34)');g.addColorStop(.35,'rgba(60,140,210,.12)');g.addColorStop(1,'rgba(40,110,180,0)');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,R*1.28,0,7);ctx.fill();
+    /* ocean sphere */
+    g=ctx.createRadialGradient(cx-R*.35,cy-R*.4,R*.1,cx,cy,R);g.addColorStop(0,'#17405E');g.addColorStop(.55,'#0D2A40');g.addColorStop(1,'#071624');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.fill();
+    /* graticule (every 30deg) */
+    ctx.lineWidth=.6;ctx.strokeStyle='rgba(120,180,220,.10)';
+    for(var lat=-60;lat<=60;lat+=30){ctx.beginPath();var pen=false;for(var lo=-180;lo<=180;lo+=4){var q=pj(m,Math.cos(lat*D2R)*Math.cos(lo*D2R),Math.cos(lat*D2R)*Math.sin(lo*D2R),Math.sin(lat*D2R));if(q[2]>0){var X=cx+R*q[0],Y=cy-R*q[1];pen?ctx.lineTo(X,Y):ctx.moveTo(X,Y);pen=true;}else pen=false;}ctx.stroke();}
+    for(var lo2=-180;lo2<180;lo2+=30){ctx.beginPath();var pen2=false;for(var la2=-88;la2<=88;la2+=4){var q2=pj(m,Math.cos(la2*D2R)*Math.cos(lo2*D2R),Math.cos(la2*D2R)*Math.sin(lo2*D2R),Math.sin(la2*D2R));if(q2[2]>0){var X2=cx+R*q2[0],Y2=cy-R*q2[1];pen2?ctx.lineTo(X2,Y2):ctx.moveTo(X2,Y2);pen2=true;}else pen2=false;}ctx.stroke();}
+    /* land dots, bucketed by depth */
+    var B=[[],[],[],[]];
+    for(var j=0;j<N;j++){var x=pts[j*3],y=pts[j*3+1],z=pts[j*3+2];
+      var Z=m[6]*x+m[7]*y+m[8]*z;if(Z<=0.02)continue;
+      var bk=Z>.75?3:Z>.5?2:Z>.25?1:0;B[bk].push(cx+R*(m[0]*x+m[1]*y+m[2]*z),cy-R*(m[3]*x+m[4]*y+m[5]*z));}
+    var AL=[.28,.48,.72,.95],SZ=[1.1,1.5,1.8,2.1];
+    for(var b=0;b<4;b++){ctx.fillStyle='rgba(134,179,207,'+AL[b]+')';var s=SZ[b]*(R/200),hs=s/2,arr=B[b];for(var k=0;k<arr.length;k+=2)ctx.fillRect(arr[k]-hs,arr[k+1]-hs,s,s);}
+    /* limb light */
+    ctx.lineWidth=1.2;ctx.strokeStyle='rgba(140,200,240,.35)';ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.stroke();
+    /* arcs */
+    var tt=reduce?0:now/1000;
+    arcs.forEach(function(a,ai){
+      var p=a.p,isSel=a.id===selId,prev=null,col=COL[a.t]||COL.none;
+      ctx.lineWidth=isSel?2.4:1.1;ctx.strokeStyle=isSel?COL.route:col;ctx.globalAlpha=isSel?1:(selId?.35:.7);
+      if(isSel){ctx.shadowColor=COL.route;ctx.shadowBlur=10;}
+      ctx.beginPath();
+      for(var k=0;k<p.length;k+=3){var q=pj(m,p[k],p[k+1],p[k+2]);var vis=!occl(q),X=cx+R*q[0],Y=cy-R*q[1];
+        if(vis){prev?ctx.lineTo(X,Y):ctx.moveTo(X,Y);prev=true;}else prev=false;}
+      ctx.stroke();ctx.shadowBlur=0;ctx.globalAlpha=1;
+      /* travelling pulse */
+      if(!reduce){var ph=((tt*(isSel?.32:.18))+ai*.137)%1,idx=Math.floor(ph*(p.length/3-1))*3,q3=pj(m,p[idx],p[idx+1],p[idx+2]);
+        if(!occl(q3)){ctx.fillStyle=isSel?'#FFE6D1':col;ctx.beginPath();ctx.arc(cx+R*q3[0],cy-R*q3[1],isSel?2.6:1.7,0,7);ctx.fill();}}
+      /* endpoint */
+      var e=p.length-3,qe=pj(m,p[e],p[e+1],p[e+2]);
+      a.sx=null;
+      if(qe[2]>0){var ex=cx+R*qe[0],ey=cy-R*qe[1];a.sx=ex;a.sy=ey;
+        ctx.fillStyle=col;ctx.beginPath();ctx.arc(ex,ey,isSel?4:2.6,0,7);ctx.fill();
+        if(isSel){ctx.strokeStyle=COL.route;ctx.lineWidth=1.4;var rp=reduce?9:6+((tt*1.4)%1)*10;ctx.globalAlpha=reduce?.6:1-((tt*1.4)%1);ctx.beginPath();ctx.arc(ex,ey,rp,0,7);ctx.stroke();ctx.globalAlpha=1;
+          ctx.font='600 11px "IBM Plex Mono",ui-monospace,monospace';ctx.fillStyle='#F4F8FA';ctx.strokeStyle='rgba(5,11,17,.9)';ctx.lineWidth=3.5;ctx.lineJoin='round';
+          ctx.strokeText(a.code,ex+8,ey-8);ctx.fillText(a.code,ex+8,ey-8);}}
+    });
+    /* home beacon */
+    var qh=pj(m,home[0],home[1],home[2]);
+    if(qh[2]>0){var hx=cx+R*qh[0],hy=cy-R*qh[1],ph2=reduce?.5:(tt*.8)%1;
+      ctx.strokeStyle='rgba(255,122,46,'+(1-ph2)+')';ctx.lineWidth=1.4;ctx.beginPath();ctx.arc(hx,hy,5+ph2*16,0,7);ctx.stroke();
+      ctx.save();ctx.translate(hx,hy);ctx.rotate(Math.PI/4);ctx.fillStyle=COL.route;ctx.fillRect(-4.5,-4.5,9,9);ctx.strokeStyle='#fff';ctx.lineWidth=1.3;ctx.strokeRect(-4.5,-4.5,9,9);ctx.restore();
+      ctx.font='600 11px "IBM Plex Mono",ui-monospace,monospace';ctx.fillStyle='#F4F8FA';ctx.strokeStyle='rgba(5,11,17,.9)';ctx.lineWidth=3.5;ctx.lineJoin='round';
+      ctx.strokeText('NGO',hx+9,hy+15);ctx.fillText('NGO',hx+9,hy+15);}
+  }
+  function loop(now){
+    raf=0;var dt=lastT?Math.min(.05,(now-lastT)/1000):0;lastT=now;
+    if(tgt){var dl=((tgt.lon-rot.lon+540)%360)-180,dp=tgt.lat-rot.lat,k=Math.min(1,dt*3.2);rot.lon+=dl*k;rot.lat+=dp*k;if(Math.abs(dl)<.05&&Math.abs(dp)<.05)tgt=null;}
+    else if(!drag&&now>idleUntil)rot.lon+=spin*dt;
+    draw(now);
+    if(onScreen&&!document.hidden&&(!reduce||tgt))raf=requestAnimationFrame(loop);
+  }
+  function kick(){if(!raf){lastT=0;raf=requestAnimationFrame(loop);}}
+  function redraw(){if(reduce&&!tgt)draw(performance.now());else kick();}
+  /* interaction */
+  cv.addEventListener('pointerdown',function(e){drag={x:e.clientX,y:e.clientY,lon:rot.lon,lat:rot.lat,id:e.pointerId};moved=false;tgt=null;});
+  cv.addEventListener('pointermove',function(e){if(!drag)return;var dx=e.clientX-drag.x,dy=e.clientY-drag.y;
+    if(!moved&&Math.hypot(dx,dy)>4){moved=true;cv.classList.add('drag');try{cv.setPointerCapture(drag.id);}catch(_){}}
+    if(!moved)return;var k=90/R;rot.lon=drag.lon-dx*k;rot.lat=Math.max(-60,Math.min(70,drag.lat+dy*k));idleUntil=performance.now()+2500;redraw();});
+  function end(e){if(!drag)return;var was=moved;drag=null;cv.classList.remove('drag');
+    if(!was&&e&&e.type==='pointerup'){var r=cv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,best=null;
+      arcs.forEach(function(a){if(a.sx==null)return;var dd=Math.hypot(a.sx-x,a.sy-y);if(dd<16&&(!best||dd<best.d))best={d:dd,id:a.id};});
+      if(best)select(best.id);}}
+  cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
+  if('ResizeObserver' in window)new ResizeObserver(function(){size();redraw();}).observe(cv);
+  else window.addEventListener('resize',function(){size();redraw();});
+  if('IntersectionObserver' in window)new IntersectionObserver(function(es){onScreen=es[0].isIntersecting;if(onScreen)redraw();}).observe(cv);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)redraw();});
+  size();redraw();
+  return {
+    update:function(list,sid){
+      var prevSel=selId;selId=sid;
+      arcs=list.map(function(d){return {id:d.id,code:d.iata||'',t:tierOf(MODES[mode].flight(d)),p:buildArc(d)};});
+      if(sid&&sid!==prevSel&&prevSel!==null){var d=dests.get(sid);if(d){var mid=slerp(home,vec(d.lon,d.lat),.5);
+        tgt={lon:Math.atan2(mid[1],mid[0])/D2R,lat:Math.max(-40,Math.min(55,Math.asin(mid[2])/D2R+8))};idleUntil=performance.now()+7000;}}
+      redraw();
+    }
+  };
+})();
+
+function renderHeroKpi(list){
+  var el=$('hkpi');if(!el)return;clear(el);
+  var f=MODES[mode].flight,best=null,okN=0;
+  dests.forEach(function(d){var p=f(d);if(p!=null&&(!best||p<best.p))best={p:p,d:d};if(mileState(d).k==='ok')okN++;});
+  el.append(
+    h('div',null,h('span',{class:'k'},'行き先 · DEST'),h('span',{class:'v'},h('b',null,String(list.length)),h('small',null,list.length!==dests.size?('/ '+dests.size+' 件'):'件'))),
+    best?h('button',{type:'button',title:best.d.name+' を地図で見る',onclick:function(){select(best.d.id);var m=$('map');if(m)m.scrollIntoView({block:'start'});}},
+        h('span',{class:'k'},MODES[mode].head),h('span',{class:'v'},h('b',null,yen(best.p)),h('small',null,best.d.name||best.d.id)))
+      :h('div',null,h('span',{class:'k'},MODES[mode].head),h('span',{class:'v'},h('b',null,'—'))),
+    h('div',null,h('span',{class:'k'},'マイルで往復'),h('span',{class:'v'},h('b',null,String(okN)),h('small',null,'か所'))));
+}
+/* ---------- render ---------- */
+function render(){
+  var list=visible();computeTiers(list);
+  if(!sel||!dests.has(sel)||list.indexOf(dests.get(sel))<0){
+    var best=null;list.forEach(function(d){var p=MODES[mode].flight(d);if(p!=null&&(best==null||p<best.p))best={p:p,d:d};});
+    sel=best?best.d.id:(list[0]?list[0].id:null);
+  }
+  renderKeys();renderHeroKpi(list);if(Globe)Globe.update(list,sel);renderMiles();renderMap(list);renderPass();renderBoard(list);renderCompare();renderAdd();renderMilesSec();renderMeta();renderLegend();
+  if(dests.size)elState().classList.remove('on');
+}
+function elState(){return $('state');}
+function showState(m){var s=elState();s.textContent=m;s.classList.add('on');}
+
+function renderKeys(){
+  var a=$('modeKeys');clear(a);
+  Object.keys(MODES).forEach(function(k){a.append(h('button',{type:'button',class:'key','aria-pressed':String(mode===k),onclick:function(){mode=k;render();}},MODES[k].label,MODES[k].sub?h('small',null,MODES[k].sub):null));});
+  var f=$('filtKeys');clear(f);
+  Object.keys(FILTERS).forEach(function(k){f.append(h('button',{type:'button',class:'key','aria-pressed':String(filt===k),onclick:function(){filt=k;render();}},FILTERS[k]));});
+  $('bhPrice').textContent=MODES[mode].head;
+}
+
+function renderMiles(){
+  var el=$('milesTk');clear(el);
+  var n=0;dests.forEach(function(d){if(mileState(d).k==='ok')n++;});
+  el.append(h('div',{class:'lbl'},h('span',null,'JAL MILEAGE BANK'),h('span',null,miles.card||'JALカードNavi')));
+  el.append(h('div',{class:'val'},flap((miles.balance||0).toLocaleString('ja-JP'),34,'amber'),h('span',{class:'u'},'マイル')));
+  el.append(h('p',null,miles.asOf?('残高は '+fmtDate(miles.asOf,false)+' 時点の申告値です。'):'保有マイルを入力すると、行ける行き先を計算します。'));
+  if(canEdit){
+    if(editMile){
+      var inp=h('input',{class:'field',id:'mileIn',type:'number',inputmode:'numeric',min:'0',step:'100',value:String(miles.balance||''),style:'width:150px','aria-label':'保有マイル'});
+      el.append(h('div',{class:'edit'},inp,
+        h('button',{type:'button',class:'key sm go',onclick:function(){var v=parseInt(inp.value,10);if(!isFinite(v)||v<0){toast('マイル数を数字で入力してください');return;}
+          write(function(){return db.doc('meta/miles').set({balance:v,asOf:new Date().toISOString(),card:miles.card||'JALカードNavi'});},'保有マイルを更新しました');editMile=false;renderMiles();}},'保存'),
+        h('button',{type:'button',class:'key sm',onclick:function(){editMile=false;renderMiles();}},'やめる')));
+    } else el.append(h('div',{class:'edit'},h('button',{type:'button',class:'key sm',onclick:function(){editMile=true;renderMiles();setTimeout(function(){var i=$('mileIn');if(i)i.focus();},0);}},'残高を更新')));
+  }
+}
+
+function monoW(t,cw){var w=0;for(var i=0;i<t.length;i++)w+=t.charCodeAt(i)>255?11:(cw||6.4);return w;}
+function mc(t){return 'var(--m-'+t+')';}
+function routeKm(d,r){
+  var pts=[NGO].concat(((r&&r.via)||[]).filter(function(v){return v&&typeof v.lon==='number';})).concat([d]),s=0;
+  for(var i=1;i<pts.length;i++)s+=km(pts[i-1],pts[i]);return s;
+}
+function fmtKm(n){return (Math.round(n/10)*10).toLocaleString('ja-JP');}
+function destPt(o,brg,dist){
+  var R=6371,r=Math.PI/180,d=dist/R,p1=o.lat*r,l1=o.lon*r,t=brg*r;
+  var p2=Math.asin(Math.sin(p1)*Math.cos(d)+Math.cos(p1)*Math.sin(d)*Math.cos(t));
+  var l2=l1+Math.atan2(Math.sin(t)*Math.sin(d)*Math.cos(p1),Math.cos(d)-Math.sin(p1)*Math.sin(p2));
+  return {lat:p2/r,lon:((l2/r+540)%360)-180};
+}
+var RINGS=[2000,5000,10000];
+function renderRings(){
+  var g=$('rings');if(!g)return;clear(g);
+  RINGS.forEach(function(dist){
+    var s='',prev=null;
+    for(var b=0;b<=360;b+=2){var q=destPt(NGO,b,dist),p=project(q.lon,q.lat);
+      s+=(prev&&Math.abs(p[0]-prev[0])<150?' L':' M')+p[0].toFixed(1)+' '+p[1].toFixed(1);prev=p;}
+    g.append(h('svg:path',{class:'ring',d:s.trim()}));
+    var lq=destPt(NGO,118,dist),lp=project(lq.lon,lq.lat);
+    g.append(h('svg:g',{class:'ring-l',transform:'translate('+lp[0].toFixed(1)+' '+lp[1].toFixed(1)+')'},
+      h('svg:g',{style:'transform:scale(var(--inv,1))'},h('svg:text',{x:'4',y:'-4'},dist.toLocaleString('ja-JP')+' km'))));
+  });
+}
+var lastDeclW=null;
+function declutter(force){
+  if(!force&&lastDeclW===view.w)return;lastDeclW=view.w;
+  var items=[].slice.call(gPins.querySelectorAll('.pin')).map(function(g){
+    var p=parseFloat(g.getAttribute('data-p'));return {g:g,tag:g.querySelector('.tag'),sel:g.classList.contains('sel'),p:isFinite(p)?p:Infinity};});
+  items.sort(function(a,b){return (b.sel-a.sel)||(a.p-b.p);});
+  var placed=[],ht=gHome.querySelector('text');if(ht)placed.push(ht.getBoundingClientRect());
+  items.forEach(function(it){
+    if(!it.tag)return;var r=it.tag.getBoundingClientRect(),pad=2;
+    var hit=placed.some(function(q){return !(r.right+pad<q.left||r.left-pad>q.right||r.bottom+pad<q.top||r.top-pad>q.bottom);});
+    if(hit&&!it.sel)it.g.classList.add('hid');else{it.g.classList.remove('hid');placed.push(r);}
+  });
+}
+function renderMap(list){
+  clear(gRoutes);clear(gPins);clear(gHome);
+  var selD=sel?dests.get(sel):null;
+  list.forEach(function(d){if(d.id===sel)return;gRoutes.append(h('svg:path',{class:'rt',d:arcPath(routePts(d,getRoutes(d)[0]))}));});
+  if(selD&&list.indexOf(selD)>=0){
+    var rs=getRoutes(selD),oi=Math.min(optSel[selD.id]||0,rs.length-1);
+    rs.forEach(function(r,i){if(i===oi)return;gRoutes.append(h('svg:path',{class:'rt alt',d:arcPath(routePts(selD,r))}));});
+    var r0=rs[oi],dd=arcPath(routePts(selD,r0));
+    gRoutes.append(h('svg:path',{class:'rt glow',d:dd}),h('svg:path',{class:'rt on',d:dd}));
+    if(!reduce)gRoutes.append(h('svg:path',{class:'rt flow',d:dd}));
+    if(prevVia&&prevVia.id===selD.id&&APMAP[prevVia.code]){
+      var pa=APMAP[prevVia.code];
+      gRoutes.append(h('svg:path',{class:'rt pv',d:arcPath(routePts(selD,{via:[{code:pa.code,lon:pa.lon,lat:pa.lat}]}))}));
+    }
+    var pl=h('svg:g',null,h('svg:g',{style:'transform:scale(var(--inv,1))'},h('svg:path',{class:'plane',d:PLANE,transform:'rotate(90)'})));
+    var tmp=h('svg:path',{d:dd,style:'fill:none;stroke:none'});gRoutes.append(tmp);
+    try{
+      var L=tmp.getTotalLength(),px=L/view.w*(elMap.getBoundingClientRect().width||1000);if(px<80)throw 0;var mp=tmp.getPointAtLength(L*0.5),lab=fmtKm(routeKm(selD,r0))+' km',w=Math.ceil(monoW(lab,6.2)+14);
+      gRoutes.append(h('svg:g',{class:'dist',transform:'translate('+mp.x.toFixed(1)+' '+mp.y.toFixed(1)+')'},h('svg:g',{style:'transform:scale(var(--inv,1))'},
+        h('svg:rect',{x:String(-w/2),y:'-23',width:String(w),height:'15',rx:'2'}),
+        h('svg:text',{x:'0',y:'-12.3','text-anchor':'middle'},lab))));
+    }catch(_){}
+    gRoutes.append(pl);
+    if(!reduce){pl.append(h('svg:animateMotion',{dur:'7s',repeatCount:'indefinite',rotate:'auto',path:dd}));}
+    else{try{var L2=tmp.getTotalLength(),pt=tmp.getPointAtLength(L2*0.3);pl.setAttribute('transform','translate('+pt.x+' '+pt.y+')');}catch(_){}}
+  }
+  var sorted=list.slice().sort(function(a,b){return (a.id===sel)-(b.id===sel);});
+  sorted.forEach(function(d){
+    var p=project(d.lon,d.lat),price=MODES[mode].flight(d),t=tierOf(price),cand=d.status==='cand';
+    var code=String(d.iata||'—'),pr=price!=null?man(price):'—',tw=Math.ceil(10+monoW(code)+5+monoW(pr)+7);
+    var inner=h('svg:g',{class:'in'},
+      h('svg:circle',{class:'ripple',r:'5',style:'stroke:'+mc(t)}),
+      h('svg:circle',{class:'aura',r:'8.5',style:'fill:'+mc(t)}),
+      h('svg:circle',{class:'core',r:'3.9',style:cand?('stroke:'+mc(t)):('fill:'+mc(t))}),
+      h('svg:g',{class:'tag'},
+        h('svg:path',{class:'lead',d:'M3 -3L9 -9'}),
+        h('svg:rect',{x:'9',y:'-23',width:String(tw),height:'15',rx:'2.5'}),
+        h('svg:rect',{class:'band',x:'9',y:'-23',width:'3',height:'15',style:'fill:'+mc(t)}),
+        h('svg:text',{x:'16',y:'-12.2'},h('svg:tspan',{class:'c'},code),h('svg:tspan',{dx:'5',style:'fill:'+(price!=null?mc(t):'var(--m-dim)')},pr))),
+      h('svg:text',{class:'nm',x:'9',y:'15'},d.name||d.id));
+    var g=h('svg:g',{class:'pin'+(cand?' cand':'')+(d.id===sel?' sel':''),transform:'translate('+p[0].toFixed(1)+' '+p[1].toFixed(1)+')',tabindex:'0',role:'button',
+      'data-p':price!=null?String(price):null,
+      'aria-label':(d.name||d.id)+(price!=null?' '+yen(price):' 価格未取得'),
+      onclick:function(){if(moved||addMode)return;select(d.id);},
+      onkeydown:function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();select(d.id);}}},inner);
+    gPins.append(g);
+  });
+  var hp=project(NGO.lon,NGO.lat);
+  gHome.append(h('svg:g',{class:'home',transform:'translate('+hp[0].toFixed(1)+' '+hp[1].toFixed(1)+')'},
+    h('svg:g',{style:'transform:scale(var(--inv,1))'},
+      reduce?null:h('svg:circle',{class:'pulse',r:'6'}),
+      h('svg:rect',{x:'-4.5',y:'-4.5',width:'9',height:'9',transform:'rotate(45)'}),
+      h('svg:text',{x:'10',y:'16'},'NGO 名古屋'))));
+  var hn=$('hudN');if(hn)hn.textContent=String(list.length);
+  var hm=$('hudM');if(hm)hm.textContent=MODES[mode].label+(MODES[mode].sub?' '+MODES[mode].sub:'');
+  applyView();declutter(true);
+}
+function chainEl(d,r){
+  var c=h('div',{class:'chain'});c.append(h('span',{class:'ap'},'NGO'));
+  ((r&&r.via)||[]).forEach(function(v){c.append(h('span',{class:'ar'},'→'),h('span',{class:'ap'},v.code||'?'));});
+  c.append(h('span',{class:'ar'},'→'),h('span',{class:'ap e'},d.iata||'—'));return c;
+}
+function seasonMini(title,sub,d,w){
+  var s=d[w]||{},fl=s.flight||{},ho=s.hotel||{};
+  var box=h('div',{class:'mini'},h('div',{class:'cap',style:'margin:0'},title+' '+sub));
+  if(num(fl.rec)==null&&num(ho.price)==null){box.append(h('p',{class:'empty',style:'margin-top:6px'},'未取得'));return box;}
+  box.append(h('div',{class:'v'},num(fl.rec)!=null?yen(fl.rec):'—'));
+  if(num(fl.low)!=null&&num(fl.high)!=null)box.append(h('p',null,'相場 '+yen(fl.low)+' 〜 '+yen(fl.high)));
+  if(num(ho.price)!=null)box.append(h('p',null,'ホテル '+yen(ho.price)+' /泊'));
+  if(s.when)box.append(h('p',null,s.when));if(s.note)box.append(h('p',null,s.note));return box;
+}
+function srcKv(kv,o,label){
+  var m=[o.checkedAt?('取得 '+fmtDate(o.checkedAt,true)):null,o.confidence?CONF[o.confidence]:null].filter(Boolean).join(' · ');
+  if(m){var old=ageDays(o.checkedAt);kv.append(h('dt',null,'情報'),h('dd',null,m,(old!=null&&old>3)?h('span',{class:'tag2'},'古い情報'):null));}
+  var u=safeUrl(o.url);
+  if(u)kv.append(h('dt',null,'出典'),h('dd',null,h('a',{href:u,target:'_blank',rel:'noopener noreferrer'},o.source||u)));
+  else if(o.source)kv.append(h('dt',null,'出典'),h('dd',null,o.source));
+}
+function renderPass(){
+  var el=$('pass');clear(el);
+  var d=sel?dests.get(sel):null;
+  if(!d){el.append(h('div',{class:'pass-m'},h('p',{class:'empty'},dests.size?'ピンか一覧から行き先を選んでください。':'行き先データを読み込み中です。')));return;}
+  var routes=getRoutes(d),oi=Math.min(optSel[d.id]||0,routes.length-1),r=routes[oi];
+  var hd=h('div',{class:'pass-h'},h('span',{class:'ph-l'},planeSvg(),'BOARDING PASS · 搭乗券(目安)'),h('span',{class:'badge'+(d.status==='cand'?' w':'')},d.status==='cand'?'未選別':'行きたい'));
+  el.append(hd);
+  var m=h('div',{class:'pass-m'});
+  var rkm=fmtKm(routeKm(d,r))+' km',ft=flightTime(d,r);
+  m.append(h('div',{class:'codes'},
+    h('div',{class:'cd'},h('b',null,'NGO'),h('small',null,'名古屋(中部)')),
+    h('div',{class:'fline'},h('i'),planeSvg(),h('i'),h('small',null,rkm+' · '+ft.v)),
+    h('div',{class:'cd r'},h('b',null,d.iata||'---'),h('small',null,d.name||d.id))));
+  m.append(h('h3',{class:'dname'},d.name||d.id),h('div',{class:'dsub'},[d.region,d.country].filter(Boolean).join(' · ')));
+  m.append(h('dl',{class:'pfields'},
+    h('div',null,h('dt',null,'ROUTE'),h('dd',null,routeLabel(r))),
+    h('div',null,h('dt',null,'DISTANCE'),h('dd',null,rkm)),
+    h('div',{title:ft.est?'距離からの推定(乗継待ちを含む概算)':null},h('dt',null,'FLIGHT'),h('dd',null,ft.v+(ft.est?'*':''))),
+    h('div',null,h('dt',null,'CLASS'),h('dd',null,'ECONOMY'))));
+  var tabs=h('div',{class:'tabs',role:'tablist','aria-label':'経路の選択'});
+  routes.forEach(function(rr,i){tabs.append(h('button',{type:'button',class:'key','aria-pressed':String(i===oi),role:'tab',onclick:function(){optSel[d.id]=i;edit=null;render();}},routeLabel(rr),num(rr.price)!=null?h('b',null,man(rr.price)):null));});
+  if(canEdit)tabs.append(h('button',{type:'button',class:'key go',onclick:function(){edit={id:d.id,idx:null,via:[],q:''};renderPass();}},'+ 経路を追加'));
+  m.append(tabs);
+  m.append(chainEl(d,r));
+  var rn=[r.kind,r.duration,r.basis==='想定'?'想定ルート(ダイヤ未確認)':(r.basis?('ルート: '+r.basis):null)].filter(Boolean).join(' · ');
+  if(rn)m.append(h('p',{class:'note'},rn));if(r.note)m.append(h('p',{class:'note'},r.note));
+  if(canEdit&&!(edit&&edit.id===d.id))m.append(h('div',{style:'margin-top:10px'},h('button',{type:'button',class:'key sm',onclick:function(){edit={id:d.id,idx:oi,via:((r.via)||[]).map(function(v){return v.code;}),q:''};renderPass();}},'この経路を編集')));
+  if(edit&&edit.id===d.id)m.append(editorEl(d,routes));
+  m.append(layoverEl(d,r));
+  el.append(m,h('div',{class:'perf'}));
+
+  var s=h('div',{class:'pass-s'});
+  var tb=h('div',{class:'tbox'});s.append(tb);
+  tb.append(h('div',{class:'cap'},'TODAY\'S LOWEST · 今日の最安(往復)'));
+  var fl=d.today&&d.today.flight,ho=d.today&&d.today.hotel;
+  if(fl&&num(fl.price)!=null){
+    tb.append(flap(yen(fl.price),34,'amber'));
+    var kv=h('dl',{class:'kv'});
+    if(fl.origin)kv.append(h('dt',null,'発'),h('dd',null,fl.origin));
+    if(fl.airline)kv.append(h('dt',null,'航空会社'),h('dd',null,fl.airline));
+    if(fl.route)kv.append(h('dt',null,'経路'),h('dd',null,fl.route));
+    if(fl.note)kv.append(h('dt',null,'条件'),h('dd',null,fl.note));
+    srcKv(kv,fl);tb.append(kv);
+  } else tb.append(h('p',{class:'empty'},'未取得です。次回の毎朝の探索で入ります。'));
+  if(ho&&num(ho.price)!=null){
+    var kv2=h('dl',{class:'kv',style:'margin-top:12px'});
+    kv2.append(h('dt',null,'ホテル'),h('dd',null,yen(ho.price)+' /泊'+(ho.name?(' · '+ho.name):'')));
+    if(ho.area)kv2.append(h('dt',null,'エリア'),h('dd',null,ho.area));
+    if(ho.note)kv2.append(h('dt',null,'条件'),h('dd',null,ho.note));
+    srcKv(kv2,ho);s.append(kv2);
+  }
+  s.append(searchEl(d));
+  s.append(h('div',{class:'sub-sec'},h('div',{class:'cap'},'SEASON GUIDE · おすすめの時期と目安'),fareCards(d)));
+  var ms=mileState(d),mb=h('div',{class:'sub-sec'},h('div',{class:'cap'},'MILES · JALマイル特典(往復・エコノミー)'));
+  if(ms.k==='none')mb.append(h('p',{class:'empty'},'この行き先のJAL特典マイルは未登録です(JAL便がない場合は提携会社特典を検討)。'));
+  else{
+    var st=h('div',{class:'mstat'},flap(ms.rt.toLocaleString('ja-JP'),24,'amber'),h('span',null,'マイル'));
+    st.append(ms.k==='ok'?h('span',{class:'pill ok'},'保有マイルで行けます'):(ms.k==='ow'?h('span',{class:'pill ow'},'往復はあと '+ms.short.toLocaleString('ja-JP')):h('span',{class:'pill short'},'あと '+ms.short.toLocaleString('ja-JP')+' マイル')));
+    mb.append(st);
+    var mm=d.miles,det=[];
+    if(ms.k==='ow')det.push('片道なら '+mm.ow.toLocaleString('ja-JP')+' マイルで行けます');
+    det.push('保有 '+(miles.balance||0).toLocaleString('ja-JP')+' マイル。燃油特別付加運賃・税金は別');
+    mb.append(h('p',{class:'note'},det.join(' / ')));
+    if(mm.note)mb.append(h('p',{class:'note'},mm.note));
+    var u3=safeUrl(mm.url);if(u3)mb.append(h('p',{class:'note'},'出典: ',h('a',{href:u3,target:'_blank',rel:'noopener noreferrer'},mm.source||u3)));
+  }
+  s.append(mb);
+  if(d.memo)s.append(h('p',{class:'note',style:'margin-top:12px'},d.memo));
+  if(canEdit)s.append(h('div',{class:'owner-bar'},
+    h('button',{type:'button',class:'key sm',onclick:function(){write(function(){return db.doc('dest/'+d.id).update({status:d.status==='cand'?'wish':'cand'});},d.status==='cand'?'「行きたい」に変更しました':'「未選別」に変更しました');}},d.status==='cand'?'「行きたい」にする':'「未選別」に戻す'),
+    h('button',{type:'button',class:'key sm warn',onclick:function(){
+      if(confirmDel!==d.id){confirmDel=d.id;clearTimeout(confirmT);confirmT=setTimeout(function(){confirmDel=null;renderPass();},4000);renderPass();return;}
+      confirmDel=null;write(function(){return db.doc('dest/'+d.id).delete();},'行き先を削除しました');}},confirmDel===d.id?'本当に削除する':'この行き先を削除')));
+  s.append(barcodeEl(d));
+  el.append(s);
+}
+
+/* --- layover finder --- */
+var foldOpen={};
+function foldEl(k){
+  var open=k in foldOpen?foldOpen[k]:window.innerWidth>640;
+  return h('details',{class:k+' fold',open:open,ontoggle:function(e){foldOpen[k]=e.target.open;}});
+}
+function layoverEl(d,r){
+  var box=foldEl('lay');
+  box.append(h('summary',{class:'cap'},'LAYOVER · 乗継地の候補(遠回りが小さい順)'));
+  var c=layoverCands(d,r);
+  if(!c.length){box.append(h('p',{class:'empty'},'この行き先では、無理のない乗継地の候補を絞れませんでした。「この経路を編集」から自由に追加できます。'));return box;}
+  var ul=h('ul',{class:'lay-list'});
+  c.forEach(function(x){
+    var on=prevVia&&prevVia.id===d.id&&prevVia.code===x.a.code;
+    var pct=Math.round(x.ratio*100),cl=pct<=12?'':(pct<=25?' m':' h');
+    var nm=x.a.name.replace(/\(.*\)/,'');
+    var act=h('div',{class:'lay-act'},
+      h('button',{type:'button',class:'key sm','aria-pressed':String(!!on),onclick:function(){prevVia=on?null:{id:d.id,code:x.a.code};renderMap(visible());renderPass();}},on?'地図から消す':'地図で見る'));
+    if(canEdit)act.append(h('button',{type:'button',class:'key sm go',onclick:function(){addLayover(d,x.a.code);}},'経路に追加'));
+    ul.append(h('li',{class:on?'pv':''},h('b',null,x.a.code),
+      h('span',null,nm,h('span',{class:'det'+cl},pct<=2?'ほぼ一直線':'遠回り +'+pct+'%'),
+        h('small',null,x.a.country+(x.jp?' · 国内乗継':'')+' · NGO→'+x.a.code+' 約'+(Math.round(x.a1/100)*100).toLocaleString('ja-JP')+'km')),act));
+  });
+  box.append(ul);
+  box.append(h('p',{class:'note',style:'margin-top:8px'},'距離から見た候補です。実際にその経由の便があるか、乗継時間、値段は下の検索ボタンで確認してください。'));
+  return box;
+}
+function addLayover(d,code){
+  var a=APMAP[code];if(!a)return;
+  var routes=getRoutes(d).slice();
+  for(var i=0;i<routes.length;i++){var v=(routes[i].via||[]);if(v.length===1&&v[0].code===code){optSel[d.id]=i;prevVia=null;render();toast('その経路はすでにあります');return;}}
+  routes.push({via:[{code:a.code,lon:a.lon,lat:a.lat}],kind:'乗継あり',basis:'手動設定',note:'',duration:''});
+  optSel[d.id]=routes.length-1;prevVia=null;var id=d.id;
+  write(function(){return db.doc('dest/'+id).update({routes:routes,route:routes[0]});},a.code+' 経由の経路を追加しました');
+}
+
+/* --- live-search links (Skyscanner / Trip.com) --- */
+function searchEl(d){
+  var box=foldEl('srch');
+  box.append(h('summary',{class:'cap'},'LIVE SEARCH · いま最新の運賃を検索(別タブ)'));
+  if(!d.iata){box.append(h('p',{class:'empty'},'空港コードがないため検索リンクを作れません。'));return box;}
+  var sk=h('a',{class:'key go',href:skyUrl(d),target:'_blank',rel:'noopener noreferrer'},'Skyscanner で見る'),
+      tr=h('a',{class:'key go',href:tripUrl(d),target:'_blank',rel:'noopener noreferrer'},'Trip.com で見る');
+  function upd(){sk.href=skyUrl(d);tr.href=tripUrl(d);saveSd();}
+  var so=h('select',{class:'field','aria-label':'出発空港',onchange:function(){sd.o=so.value;upd();}});
+  SEARCH_ORIGINS.forEach(function(o){var op=h('option',{value:o[0]},o[1]);if(o[0]===sd.o)op.selected=true;so.append(op);});
+  var di=h('input',{class:'field',type:'date',value:sd.dep,min:isoDay(0),'aria-label':'出発日',onchange:function(){sd.dep=di.value;upd();}}),
+      ri=h('input',{class:'field',type:'date',value:sd.ret,min:isoDay(0),'aria-label':'帰国日',onchange:function(){sd.ret=ri.value;upd();}});
+  box.append(h('div',{class:'row'},
+    h('label',null,'出発空港',so),h('label',null,'出発日',di),h('label',null,'帰国日(空で片道)',ri)));
+  box.append(h('div',{class:'row'},sk,tr));
+  box.append(h('p',{class:'fine'},'エコノミー・大人1名の検索が開きます。表示価格は各サイトの検索時点のもので、燃油・手荷物条件は画面で確認してください。経由地の絞り込みは各サイト側の「乗継」フィルターで行えます。'));
+  return box;
+}
+
+/* --- route editor --- */
+function editorEl(d,routes){
+  var box=h('div',{class:'editor'});
+  box.append(h('h4',null,edit.idx==null?'新しい経路を追加':'経路を編集'));
+  var ch=h('div',{class:'edchain'});
+  ch.append(h('span',{class:'chip',style:'border-color:var(--line);padding:3px 8px'},'NGO'));
+  edit.via.forEach(function(code,i){
+    ch.append(h('span',null,'→'),h('span',{class:'chip'},code,
+      i>0?h('button',{type:'button','aria-label':code+'を前へ',onclick:function(){var t=edit.via[i-1];edit.via[i-1]=edit.via[i];edit.via[i]=t;renderPass();}},'‹'):null,
+      h('button',{type:'button','aria-label':code+'を外す',onclick:function(){edit.via.splice(i,1);renderPass();}},'×')));
+  });
+  ch.append(h('span',null,'→'),h('span',{class:'chip',style:'border-color:var(--route);color:var(--route);padding:3px 8px'},d.iata||'目的地'));
+  box.append(ch);
+  box.append(h('div',{class:'cap'},'よく使う乗継地(押すと追加・もう一度で外す)'));
+  var hubs=h('div',{class:'hubs'});
+  HUBS.forEach(function(c){var on=edit.via.indexOf(c)>=0,a=APMAP[c];
+    hubs.append(h('button',{type:'button',class:'key','aria-pressed':String(on),onclick:function(){var i=edit.via.indexOf(c);if(i>=0)edit.via.splice(i,1);else edit.via.push(c);renderPass();}},c,h('small',null,a?a.name.replace(/\(.*\)/,''):'')));});
+  box.append(hubs);
+  box.append(h('div',{class:'cap'},'ほかの乗継地を探す'));
+  var inp=h('input',{class:'field',type:'search',placeholder:'都市・空港コード(例: ドバイ / DXB)',value:edit.q||'','aria-label':'乗継地を検索',autocomplete:'off',style:'width:100%'});
+  var ul=h('ul',{class:'sugg'});
+  function fill(){clear(ul);searchAP(inp.value).forEach(function(a){
+    if(edit.via.indexOf(a.code)>=0||a.code===d.iata)return;
+    ul.append(h('li',null,h('b',null,a.code),h('span',null,a.name,h('small',null,a.country)),h('button',{type:'button',class:'key sm',onclick:function(){edit.via.push(a.code);edit.q='';renderPass();}},'追加')));});}
+  inp.addEventListener('input',function(){edit.q=inp.value;fill();});fill();
+  box.append(inp,ul);
+  var act=h('div',{class:'ed-act'},
+    h('button',{type:'button',class:'key go',onclick:saveRoute},'この経路を保存'),
+    h('button',{type:'button',class:'key',onclick:function(){edit=null;renderPass();}},'キャンセル'));
+  if(edit.idx!=null&&routes.length>1)act.append(h('button',{type:'button',class:'key warn',onclick:delRoute},'この経路を削除'));
+  box.append(act);
+  return box;
+}
+function viaObjs(codes,old){
+  var out=[];codes.forEach(function(c){var a=APMAP[c];
+    if(a)out.push({code:a.code,lon:a.lon,lat:a.lat});
+    else{var o=(old||[]).filter(function(v){return v.code===c;})[0];if(o)out.push(o);}});
+  return out;
+}
+function saveRoute(){
+  var d=dests.get(edit.id);if(!d)return;
+  var routes=getRoutes(d).slice(),old=edit.idx!=null?(routes[edit.idx].via||[]):[];
+  var via=viaObjs(edit.via,old);
+  var base=edit.idx!=null?routes[edit.idx]:{};
+  var opt=Object.assign({},base,{via:via,kind:via.length?'乗継あり':'直行',basis:'手動設定',note:base.note||'',duration:base.duration||''});
+  var idx=edit.idx;if(idx==null){routes.push(opt);idx=routes.length-1;}else routes[idx]=opt;
+  optSel[d.id]=idx;var id=d.id;edit=null;
+  write(function(){return db.doc('dest/'+id).update({routes:routes,route:routes[0]});},'経路を保存しました');
+}
+function delRoute(){
+  var d=dests.get(edit.id);if(!d)return;
+  var routes=getRoutes(d).filter(function(_,i){return i!==edit.idx;});
+  optSel[d.id]=0;var id=d.id;edit=null;
+  write(function(){return db.doc('dest/'+id).update({routes:routes,route:routes[0]});},'経路を削除しました');
+}
+
+/* --- board --- */
+var boardAll=false,boardSig='',BOARD_LIM=12;
+function remarkOf(d,p,t,ms){
+  if(p==null)return ['wait','取得待ち'];
+  if(t==='cheap')return ['hot','狙い目'];
+  if(ms.k==='ok')return ['mi','マイル可'];
+  var ck=mode==='today'&&d.today&&d.today.flight&&d.today.flight.checkedAt,age=ck?ageDays(ck):null;
+  if(age!=null&&age>3)return ['old','要再確認'];
+  if(t==='high')return ['high','割高'];
+  return ['std','標準'];
+}
+function renderBoard(list){
+  var el=$('brows');clear(el);
+  var f=MODES[mode].flight,hf=MODES[mode].hotel;
+  var sorted=sortList(list,sortKey);
+  var ps=sorted.map(f).filter(function(v){return v!=null;});
+  var lo=ps.length?Math.min.apply(null,ps):0,hi=ps.length?Math.max.apply(null,ps):0;
+  var selIdx=-1;sorted.forEach(function(d,i){if(d.id===sel)selIdx=i;});
+  var canCollapse=sorted.length>BOARD_LIM+2&&selIdx<BOARD_LIM,collapsed=canCollapse&&!boardAll;
+  var sig=[mode,sortKey,filt,boardQ,sorted.length].join('|'),anim=sig!==boardSig&&!reduce;boardSig=sig;
+  el.classList.toggle('anim',anim);
+  var bal=miles.balance||0,atMax=cmp.length>=3;
+  sorted.forEach(function(d,i){
+    if(collapsed&&i>=BOARD_LIM)return;
+    var p=f(d),hp=hf(d),t=tierOf(p),ms=mileState(d),r0=getRoutes(d)[0],inCmp=cmp.indexOf(d.id)>=0,rk=remarkOf(d,p,t,ms);
+    var code=String(d.iata||'---'),dur=String(r0.duration||'').split(/[((]/)[0].trim();
+    var bw=p!=null?(hi>lo?10+90*(Math.log(p)-Math.log(lo))/(Math.log(hi)-Math.log(lo)):50):0;
+    var fl=h('span',{class:'bflap','aria-label':code});
+    code.split('').forEach(function(c,j){fl.append(h('i',{style:'--d:'+(Math.min(i,14)*35+j*55)+'ms','aria-hidden':'true'},c));});
+    var mv,msub,mfill=0;
+    if(ms.k==='none'){mv='—';msub='JAL便なし';}
+    else{mv=ms.rt.toLocaleString('ja-JP');mfill=Math.min(1,bal/ms.rt);msub=ms.k==='ok'?'保有で行ける':(ms.k==='ow'?'片道なら可':'あと '+ms.short.toLocaleString('ja-JP'));}
+    var cand=d.status==='cand';
+    el.append(h('div',{class:'brow'+(i%2?' z':''),role:'button',tabindex:'0','aria-current':String(d.id===sel),
+        onclick:function(){select(d.id);},
+        onkeydown:function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();select(d.id);}}},
+      h('span',{class:'bcmp'},h('button',{type:'button',class:'cmpbtn','aria-pressed':String(inCmp),'aria-label':(inCmp?'比較から外す':'比較に追加'),disabled:(atMax&&!inCmp)?'':null,onclick:function(e){e.stopPropagation();toggleCmp(d.id);}},'✓')),
+      h('span',{class:'bn c2'},String(i+1).padStart(2,'0')),
+      h('span',{class:'bname'},
+        h('span',{class:'bnm'},h('span',{class:'dt'+(cand?' h':''),style:(cand?'border-color:':'background:')+mc(t)+(cand?'':';box-shadow:0 0 8px '+mc(t))}),h('span',{class:'nt'},d.name||d.id)),
+        h('small',null,h('span',{class:'mcode'},code),h('span',{class:'rg'},[d.region,d.country].filter(Boolean).join(' · ')),h('span',{class:'rmk-sm '+rk[0]},rk[1])),
+        h('span',{class:'rmk rmk-in '+rk[0]},rk[1])),
+      h('span',{class:'bcode c3'},fl),
+      h('span',{class:'brt c4'},h('span',{class:'ch'},['NGO'].concat((r0.via||[]).map(function(v){return v.code;})).concat([code]).join(' › ')),
+        h('small',null,[routeLabel(r0),fmtKm(routeKm(d,r0))+' km',dur].filter(Boolean).join(' · ')+(r0.basis==='想定'?'(想定)':''))),
+      h('span',{class:'bpr'+(p==null?' none':'')},h('b',null,p!=null?yen(p):'取得待ち'),
+        p!=null?h('span',{class:'pbar'},h('i',{style:'width:'+bw.toFixed(1)+'%;background:'+mc(t)})):null,
+        hp!=null?h('small',null,'ホテル '+yen(hp)+'/泊'):null),
+      h('span',{class:'bmi '+ms.k},h('b',null,mv),ms.k!=='none'?h('span',{class:'mbar'},h('i',{style:'width:'+(mfill*100).toFixed(1)+'%'})):null,h('small',null,msub)),
+      h('span',{class:'c8'},h('span',{class:'rmk '+rk[0]},rk[1]))));
+  });
+  if(!sorted.length)el.append(h('p',{class:'empty',style:'padding:18px;color:var(--bdim)'},boardQ.trim()?'「'+boardQ.trim()+'」に一致する行き先がありません。':'該当する行き先がありません。'));
+  var foot=$('bfoot');clear(foot);
+  foot.append(h('span',null,'価格あり '+ps.length+' / '+sorted.length+' 件 · 色とバーは表示中の価格の相対位置'));
+  if(canCollapse)foot.append(h('button',{type:'button',class:'bmore',onclick:function(){boardAll=!boardAll;renderBoard(visible());if(!boardAll){var b=$('board');if(b)b.scrollIntoView({block:'start'});}}},
+    boardAll?'上位'+BOARD_LIM+'件に戻す ▴':'残り '+(sorted.length-BOARD_LIM)+' 件を表示 ▾'));
+}
+
+function toggleCmp(id){
+  var i=cmp.indexOf(id);
+  if(i>=0){cmp.splice(i,1);}
+  else{if(cmp.length>=3){toast('比較できるのは3件までです');return;}cmp.push(id);}
+  renderBoard(sortList(visible(),sortKey));
+  renderCompare();
+}
+function renderCompare(){
+  var wrap=$('cmpwrap');if(!wrap)return;
+  var arr=cmp.map(function(id){return dests.get(id);}).filter(Boolean);
+  wrap.hidden=arr.length===0;
+  var n=$('cmpN');if(n)n.textContent=String(arr.length);
+  var box=$('cmpTable');clear(box);
+  if(!arr.length)return;
+  var grid=h('div',{class:'cmpgrid'});
+  arr.forEach(function(d){
+    var p=MODES[mode].flight(d),t=tierOf(p),hp=MODES[mode].hotel(d),ms=mileState(d),r0=getRoutes(d)[0];
+    var mtxt=ms.k==='none'?'—':ms.rt.toLocaleString('ja-JP')+' マイル';
+    var msub=ms.k==='ok'?'保有で行ける':(ms.k==='ow'?'片道なら可':(ms.k==='short'?('あと'+ms.short.toLocaleString('ja-JP')):'JAL便なし/未登録'));
+    var sp=d.spring&&d.spring.flight,su=d.summer&&d.summer.flight;
+    var kv=h('dl',{class:'kv'},
+      h('dt',null,MODES[mode].head),h('dd',null,p!=null?yen(p):'取得待ち'),
+      h('dt',null,'経路'),h('dd',null,routeLabel(r0)+(r0.duration?'・'+r0.duration:'')),
+      h('dt',null,'春休み目安'),h('dd',null,sp&&num(sp.rec)!=null?yen(sp.rec):'—'),
+      h('dt',null,'夏休み目安'),h('dd',null,su&&num(su.rec)!=null?yen(su.rec):'—'),
+      h('dt',null,'ホテル/泊'),h('dd',null,hp!=null?yen(hp):'—'),
+      h('dt',null,'マイル'),h('dd',null,mtxt,h('small',{style:'display:block;color:var(--ink2);font-size:10.5px;font-weight:400'},msub)));
+    grid.append(h('div',{class:'cmpcard',style:'border-top-color:'+tc(t)},
+      h('button',{type:'button',class:'x','aria-label':'比較から外す',onclick:function(){toggleCmp(d.id);}},'✕'),
+      h('h4',null,d.name||d.id),
+      h('div',{class:'sub'},[d.iata,[d.region,d.country].filter(Boolean).join(' · ')].filter(Boolean).join(' · ')),
+      kv));
+  });
+  box.append(grid);
+}
+
+/* --- add --- */
+function kata(s){return s.replace(/[ぁ-ゖ]/g,function(c){return String.fromCharCode(c.charCodeAt(0)+0x60);});}
+function searchAP(q){
+  q=kata((q||'').trim().toLowerCase());if(!q)return [];
+  var out=[];AIRPORTS.forEach(function(a){
+    var s=(a.code+' '+a.name+' '+a.en+' '+a.country).toLowerCase(),nm=a.name.toLowerCase(),en=a.en.toLowerCase(),sc=9;
+    if(a.code.toLowerCase()===q)sc=0;else if(nm.indexOf(q)===0||en.indexOf(q)===0)sc=1;else if(s.indexOf(q)>=0)sc=2;
+    if(sc<9)out.push({a:a,s:sc});});
+  out.sort(function(x,y){return x.s-y.s||x.a.name.localeCompare(y.a.name,'ja');});
+  return out.slice(0,8).map(function(o){return o.a;});
+}
+function existsIata(code){var f=false;dests.forEach(function(d){if(d.iata===code)f=true;});return f;}
+function uniqueId(code){var base=code.toLowerCase(),id=base,n=2;while(dests.has(id)){id=base+'-'+n++;}return id;}
+function addDest(a,customName){
+  if(!db||!canEdit){toast('追加はオーナーのみ可能です');return;}
+  if(existsIata(a.code)&&!customName){toast(a.name+' は登録済みです');return;}
+  var id=uniqueId(a.code),route={via:[],kind:'経路未設定',duration:'',basis:'未設定',note:'チケットの「経路を編集」で乗継地を設定できます'};
+  var doc={id:id,name:customName||a.name.replace(/\(.*\)/,''),country:a.country,region:a.region,status:addStatus,lon:a.lon,lat:a.lat,iata:a.code,route:route,routes:[route],addedAt:new Date().toISOString()};
+  write(function(){return db.doc('dest/'+id).set(doc);},(doc.name)+' を追加しました。次の朝の探索で価格が入ります');
+  sel=id;addQuery='';var q=$('addq');if(q)q.value='';pickNear=null;setPick(false);
+  setTimeout(function(){var m=document.getElementById('map');if(m)m.scrollIntoView({block:'start'});},50);
+}
+function renderAddResults(){
+  var ul=$('addres');clear(ul);
+  var arr=pickNear?pickNear:searchAP(addQuery);
+  if(pickNear)ul.append(h('li',{style:'display:block;border-style:dashed'},h('b',{style:'font-family:var(--sans)'},'クリックした場所に近い空港'),h('small',null,'いちばん近いものを選ぶと、その都市にピンを立てます')));
+  arr.forEach(function(a){
+    var ex=existsIata(a.code);
+    ul.append(h('li',null,h('b',null,a.code),h('span',null,a.name,h('small',null,a.country+(a.dist!=null?' · 約'+Math.round(a.dist).toLocaleString('ja-JP')+'km':''))),
+      h('button',{type:'button',class:'key sm go',disabled:(ex||!canEdit)?'':null,onclick:function(){addDest(a);}},ex?'登録済み':'追加')));
+  });
+  if(!arr.length&&addQuery.trim())ul.append(h('li',{style:'display:block'},'見つかりませんでした。地図をクリックして、近い空港から追加できます。'));
+}
+function renderAdd(){
+  var s=$('addStatus');clear(s);
+  [['wish','行きたい'],['cand','未選別(あとで選ぶ)']].forEach(function(p){s.append(h('button',{type:'button',class:'key sm','aria-pressed':String(addStatus===p[0]),onclick:function(){addStatus=p[0];renderAdd();}},p[1]));});
+  $('pickBtn').setAttribute('aria-pressed',String(addMode));
+  $('pickBtn').textContent=addMode?'指定をやめる':'地図をクリックして追加';
+  $('ownerNote').textContent=canEdit?'':'追加・編集はこのページのオーナーのみ可能です。';
+  $('addq').disabled=!canEdit;
+  renderAddResults();
+}
+function setPick(on){addMode=on;elMap.classList.toggle('pick',on);$('pickbar').classList.toggle('on',on);if(!on)pickNear=null;}
+
+/* --- miles section: summary + runway + tier ladder --- */
+function renderMilesSec(){
+  var bal=miles.balance||0,f=MODES[mode].flight;
+  var arr=[];dests.forEach(function(d){if(d.miles&&num(d.miles.rt)!=null)arr.push(d);});
+  var noJal=dests.size-arr.length;
+  arr.sort(function(a,b){return a.miles.rt-b.miles.rt||(a.name||'').localeCompare(b.name||'','ja');});
+  $('milesNote').textContent='往復・エコノミー・基本マイル数'+(noJal?' · JAL便のない '+noJal+'か所は対象外':'');
+  var groups=[],gm={};
+  arr.forEach(function(d){var k=d.miles.rt;if(!gm[k]){gm[k]={rt:k,ow:num(d.miles.ow),list:[]};groups.push(gm[k]);}gm[k].list.push(d);});
+  var stOf=function(g){return g.rt<=bal?'ok':((g.ow!=null?g.ow:g.rt/2)<=bal?'ow':'short');};
+  var okN=0,owN=0;groups.forEach(function(g){var k=stOf(g);if(k==='ok')okN+=g.list.length;else if(k==='ow')owN+=g.list.length;});
+  var next=groups.filter(function(g){return g.rt>bal;})[0];
+  var best=null;arr.forEach(function(d){var p=f(d);if(p==null)return;var v=p/d.miles.rt;if(!best||v>best.v)best={d:d,v:v};});
+
+  var s=$('msum');clear(s);
+  s.append(
+    h('div',{class:'ms'},h('div',{class:'ms-k'},'往復で行ける'),h('div',{class:'ms-v'},h('b',null,String(okN)),h('small',null,'か所')),
+      h('div',{class:'ms-s'},owN?'片道なら さらに '+owN+'か所':'—')),
+    h('div',{class:'ms'},h('div',{class:'ms-k'},'次に解放される行き先'),
+      h('div',{class:'ms-v t'},next?next.list.map(function(d){return d.name||d.id;}).join('・'):'すべて到達'),
+      h('div',{class:'ms-s'},next?['あと ',h('b',null,(next.rt-bal).toLocaleString('ja-JP')),' マイル(往復 '+next.rt.toLocaleString('ja-JP')+')']:'')),
+    h('div',{class:'ms'},h('div',{class:'ms-k'},'いちばん得な使い道'),
+      h('div',{class:'ms-v t'},best?(best.d.name||best.d.id):'—'),
+      h('div',{class:'ms-s'},best?['1マイル ≈ ',h('b',null,best.v.toFixed(1)+'円'),'('+MODES[mode].head+'÷必要マイル)']:'価格データ待ち')));
+
+  var mx=Math.max(bal,groups.length?groups[groups.length-1].rt:0,10000);mx=Math.ceil(mx*1.06/10000)*10000;
+  var pc=function(v){return (Math.max(0,Math.min(v,mx))/mx*100).toFixed(2)+'%';};
+  var rw=$('runway');clear(rw);
+  var track=h('div',{class:'rw-track',role:'img','aria-label':'保有 '+bal.toLocaleString('ja-JP')+' マイルで往復 '+okN+'か所、片道 '+owN+'か所に届きます'});
+  var wide=bal/mx>.16;
+  track.append(h('div',{class:'rw-reach',style:'width:'+pc(bal)},wide?h('span',{class:'rw-zl ok'},'往復で行ける'):null));
+  if(bal<mx)track.append(h('div',{class:'rw-ow',style:'left:'+pc(bal)+';width:calc('+pc(2*bal)+' - '+pc(bal)+')'},wide?h('span',{class:'rw-zl ow'},'片道なら'):null));
+  groups.forEach(function(g){track.append(h('i',{class:'rw-n '+stOf(g),style:'left:'+pc(g.rt),title:g.rt.toLocaleString('ja-JP')+' マイル: '+g.list.map(function(d){return d.name;}).join('、')}));});
+  track.append(h('div',{class:'rw-bal',style:'left:'+pc(bal)},h('span',null,'保有 '+bal.toLocaleString('ja-JP'))));
+  var axis=h('div',{class:'rw-axis','aria-hidden':'true'});
+  for(var v=0;v<=mx;v+=10000)axis.append(h('span',{style:'left:'+pc(v)},v===0?'0':(v/1000)+'k'));
+  rw.append(track,axis);
+
+  var ld=$('ladder');clear(ld);
+  groups.forEach(function(g){
+    var k=stOf(g),gap=(g.rt-bal).toLocaleString('ja-JP');
+    var st=k==='ok'?['往復で行ける',null]:(k==='ow'?['片道なら行ける','往復まで あと '+gap]:['あと '+gap+' マイル',null]);
+    var chips=h('div',{class:'lr-d'});
+    g.list.forEach(function(d){
+      var p=f(d),vv=p!=null?p/g.rt:null,isB=!!(best&&best.d===d);
+      chips.append(h('button',{type:'button',class:'mchip'+(isB?' best':''),title:p!=null?(MODES[mode].head+' '+yen(p)+' ÷ '+g.rt.toLocaleString('ja-JP')+'マイル'):null,
+        onclick:function(){select(d.id);var m=$('map');if(m)m.scrollIntoView({block:'start'});}},
+        h('code',null,d.iata||''),d.name||d.id,vv!=null?h('small',null,vv.toFixed(1)+'円/マイル'):null,isB?h('span',{class:'bst'},'高還元'):null));
+    });
+    ld.append(h('div',{class:'lr '+k},
+      h('div',{class:'lr-v'},h('b',null,g.rt.toLocaleString('ja-JP')),h('small',null,'片道 '+(g.ow!=null?g.ow.toLocaleString('ja-JP'):'—'))),
+      h('div',{class:'lr-s'},h('i'),h('span',null,st[0],st[1]?h('em',null,st[1]):null)),
+      chips));
+  });
+  if(!groups.length)ld.append(h('p',{class:'empty'},'マイル情報のある行き先がまだありません。'));
+}
+function renderMeta(){
+  var el=$('meta');clear(el);
+  var priced=0,total=0;dests.forEach(function(d){total++;if(MODES.today.flight(d)!=null)priced++;});
+  var when=meta&&meta.lastRunAt?fmtDate(meta.lastRunAt,true):null;
+  el.append(h('div',null,'最終更新 ',h('b',null,when||'— 初回の探索待ち')),h('div',null,'今日の価格 ',h('b',null,priced+' / '+total),' 件'));
+}
+function renderLegend(){
+  var el=$('legend');clear(el);
+  var t=function(c,l){return h('span',{class:'lg'},h('i',{style:'background:var(--m-'+c+');box-shadow:0 0 6px var(--m-'+c+')'}),l);};
+  el.append(h('div',{class:'r'},t('cheap','安め'),t('mid','中'),t('high','高め'),t('none','未取得')),
+    h('div',{class:'r'},h('span',{class:'lg'},h('i',{class:'f'}),'塗り = 選別済み'),h('span',{class:'lg'},h('i',{class:'h'}),'中抜き = 未選別'),h('span',{class:'lg'},h('i',{class:'rg'}),'名古屋からの距離')));
+}
+function select(id){
+  sel=id;edit=null;confirmDel=null;prevVia=null;render();
+  if(window.innerWidth<=1100){var p=$('pass');if(p&&p.getBoundingClientRect().top>window.innerHeight*0.7)p.scrollIntoView({behavior:'smooth',block:'start'});}
+}
+
+/* ---------- write ---------- */
+function write(fn,okMsg){
+  if(!db){toast('データベースに接続できません');return Promise.resolve();}
+  return Promise.resolve().then(fn).then(function(){if(okMsg)toast(okMsg);}).catch(function(e){
+    toast((e&&(e.code==='invalid_argument'||e.code==='not_granted'))?'保存できませんでした(編集の権限がありません)':'保存に失敗しました。もう一度お試しください');
+  });
+}
+
+/* ---------- pan / zoom / pick ---------- */
+function applyView(){var h2=view.w*VB0.h/VB0.w;elMap.setAttribute('viewBox',view.x.toFixed(1)+' '+view.y.toFixed(1)+' '+view.w.toFixed(1)+' '+h2.toFixed(1));elMap.style.setProperty('--inv',(view.w/VB0.w).toFixed(3));declutter(false);}
+function clampView(){view.w=Math.max(VB0.w/8,Math.min(VB0.w,view.w));var h2=view.w*VB0.h/VB0.w;view.x=Math.max(VB0.x,Math.min(VB0.x+VB0.w-view.w,view.x));view.y=Math.max(VB0.y,Math.min(VB0.y+VB0.h-h2,view.y));}
+function zoomAt(f,cx,cy){var nw=Math.max(VB0.w/8,Math.min(VB0.w,view.w*f)),k=nw/view.w;view.x=cx-(cx-view.x)*k;view.y=cy-(cy-view.y)*k;view.w=nw;clampView();applyView();}
+function svgPoint(ev){var r=elMap.getBoundingClientRect();return [view.x+(ev.clientX-r.left)/r.width*view.w,view.y+(ev.clientY-r.top)/r.height*(view.w*VB0.h/VB0.w)];}
+elMap.addEventListener('wheel',function(e){e.preventDefault();var p=svgPoint(e);zoomAt(e.deltaY<0?0.85:1/0.85,p[0],p[1]);},{passive:false});
+var drag=null;
+elMap.addEventListener('pointerdown',function(e){drag={sx:e.clientX,sy:e.clientY,vx:view.x,vy:view.y,id:e.pointerId};moved=false;});
+elMap.addEventListener('pointermove',function(e){
+  if(!drag)return;var dx=e.clientX-drag.sx,dy=e.clientY-drag.sy;
+  if(!moved&&Math.hypot(dx,dy)>5){moved=true;elMap.classList.add('drag');try{elMap.setPointerCapture(drag.id);}catch(_){}}
+  if(!moved)return;var r=elMap.getBoundingClientRect(),s=view.w/r.width;view.x=drag.vx-dx*s;view.y=drag.vy-dy*s;clampView();applyView();});
+function endDrag(){var wasMoved=moved;drag=null;elMap.classList.remove('drag');setTimeout(function(){moved=false;},0);return wasMoved;}
+elMap.addEventListener('pointerup',function(e){
+  var was=moved;endDrag();
+  if(!was&&addMode&&e.target.closest&&!e.target.closest('.pin')){
+    var p=svgPoint(e),ll=unproject(p[0],p[1]);
+    if(!ll){toast('地図の外です。陸地や海の上をクリックしてください');return;}
+    var here={lon:ll[0],lat:ll[1]};
+    pickNear=AIRPORTS.map(function(a){return Object.assign({dist:km(here,a)},a);}).sort(function(x,y){return x.dist-y.dist;}).slice(0,4);
+    renderAddResults();$('add').scrollIntoView({block:'start'});
+  }
+});
+elMap.addEventListener('pointercancel',endDrag);
+function ctr(){return [view.x+view.w/2,view.y+view.w*VB0.h/VB0.w/2];}
+$('zin').addEventListener('click',function(){var c=ctr();zoomAt(0.7,c[0],c[1]);});
+$('zout').addEventListener('click',function(){var c=ctr();zoomAt(1/0.7,c[0],c[1]);});
+$('zreset').addEventListener('click',function(){view={x:VB0.x,y:VB0.y,w:VB0.w};applyView();});
+$('boardQ').addEventListener('input',function(e){boardQ=e.target.value;render();});
+$('boardSort').addEventListener('change',function(e){sortKey=e.target.value;renderBoard(sortList(visible(),sortKey));});
+$('cmpClear').addEventListener('click',function(){cmp=[];renderBoard(sortList(visible(),sortKey));renderCompare();});
+$('addq').addEventListener('input',function(e){addQuery=e.target.value;pickNear=null;renderAddResults();});
+$('addq').addEventListener('keydown',function(e){if(e.key==='Enter'){var r=searchAP(addQuery)[0];if(r)addDest(r);}});
+$('pickBtn').addEventListener('click',function(){if(!canEdit){toast('追加はオーナーのみ可能です');return;}setPick(!addMode);renderAdd();if(addMode)$('map').scrollIntoView({block:'start'});});
+
+/* ---------- boot ---------- */
+if(window.innerWidth<=640){view.w=VB0.w*0.62;view.x=VB0.x+VB0.w*0.5;view.y=VB0.y+20;clampView();}
+renderKeys();renderLegend();renderRings();applyView();renderPass();renderAdd();renderMilesSec();renderMiles();
+(function(){var ll=$('hudLL');if(ll&&NGO)ll.textContent=NGO.lat.toFixed(2)+'N '+NGO.lon.toFixed(2)+'E';
+  var fmt=new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+  function tick(){var c=$('bclock');if(c)c.textContent=fmt.format(new Date());}tick();setInterval(tick,1000);})();
+showState('行き先データを読み込み中…');
+(async function(){
+  try{db=(window.claude&&window.claude.use)?await window.claude.use('db'):null;}catch(_){db=null;}
+  if(!db){showState('データを読み込めません。claude.ai にサインインしたブラウザで、このページを開いてください。');return;}
+  try{var user=await window.claude.use('user');canEdit=!!(user&&user.canEdit&&user.canEdit());}catch(_){canEdit=false;}
+  db.collection('dest').onSnapshot(function(snap){
+    var m=new Map();snap.docs.forEach(function(s){if(s.exists){var v=s.data();m.set(s.id,Object.assign({},v,{id:s.id}));}});
+    dests=m;if(!m.size)showState('行き先データがまだありません。');render();
+  },function(){showState('データの読み込みに失敗しました。ページを開き直してください。');});
+  db.doc('meta/status').onSnapshot(function(s){meta=s.exists?s.data():null;renderMeta();},function(){});
+  db.doc('meta/miles').onSnapshot(function(s){if(s.exists){var v=s.data();miles={balance:num(v.balance)||0,asOf:v.asOf||null,card:v.card||'JALカードNavi'};}render();},function(){});
+})();
+})();
+</script>

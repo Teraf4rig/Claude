@@ -1,0 +1,59 @@
+{
+  "country": "ベトナム",
+  "iata": "HAN",
+  "id": "hanoi",
+  "lat": 21.03,
+  "lon": 105.85,
+  "miles": {
+    "basis": "基本マイル数(片道×2)",
+    "chartDate": "2026-04-16",
+    "checkedAt": "2026-09-21T12:00:00+09:00",
+    "cls": "エコノミー",
+    "ow": 13000,
+    "rt": 26000,
+    "source": "JAL 国際線特典航空券 必要マイル数(日本発着・片道・エコノミー基本)",
+    "url": "https://www.jal.co.jp/jp/ja/jalmile/use/jal/inter/routemiles.html"
+  },
+  "name": "ハノイ",
+  "region": "アジア",
+  "route": {
+    "basis": "確認済(スカイチケット)",
+    "duration": "約5時間",
+    "kind": "直行",
+    "note": "中部発の直行便(ベトジェット・ベトナム航空)を確認",
+    "via": []
+  },
+  "spring": {
+    "flight": {
+      "high": 68030,
+      "low": 61230,
+      "rec": 64630
+    },
+    "note": "Trip.com 名古屋発の月別平均(往復・過去12か月): 2月68,030円・3月61,230円",
+    "when": "2月の方が3月より高い"
+  },
+  "status": "wish",
+  "summer": {
+    "flight": {
+      "high": 74000,
+      "low": 47250,
+      "rec": 60625
+    },
+    "note": "Trip.com 名古屋発の月別平均(往復・過去12か月): 8月74,000円(年間最高)・9月47,250円(年間最安)",
+    "when": "8月が年間最高、9月は年間最安(前回記載の傾向とは逆転。次回以降も要確認)"
+  },
+  "today": {
+    "flight": {
+      "airline": "ベトジェットエア",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示、直行便)。10/20〜10/26の運賃(前回と同額)。",
+      "origin": "NGO",
+      "price": 50110,
+      "route": "NGO⇄ハノイ 直行",
+      "source": "Trip.com 名古屋発ハノイ",
+      "url": "https://jp.trip.com/flights/nagoya-to-hanoi/airfares-ngo-han/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

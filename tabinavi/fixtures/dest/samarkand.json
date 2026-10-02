@@ -1,0 +1,37 @@
+{
+  "country": "ウズベキスタン",
+  "iata": "SKD",
+  "id": "samarkand",
+  "lat": 39.65,
+  "lon": 66.96,
+  "name": "サマルカンド",
+  "region": "中東・中央アジア",
+  "route": {
+    "basis": "想定",
+    "duration": "",
+    "kind": "乗継あり",
+    "note": "乗継地は一例。最安ルートは毎日の探索で更新します",
+    "via": [
+      {
+        "code": "ICN",
+        "lat": 37.46,
+        "lon": 126.45
+      }
+    ]
+  },
+  "status": "wish",
+  "today": {
+    "flight": {
+      "airline": "中国東方航空",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示)。11/10〜11/13の運賃(前回と同額)。片道最安はアシアナ航空80,940円(仁川・タシケント経由・11/1)。",
+      "origin": "NGO",
+      "price": 174340,
+      "route": "上海(PVG)・西安(XIY)経由2回",
+      "source": "Trip.com 名古屋発サマルカンド",
+      "url": "https://jp.trip.com/flights/nagoya-to-samarkand/airfares-ngo-skd/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

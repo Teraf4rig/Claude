@@ -1,0 +1,60 @@
+{
+  "country": "タイ",
+  "iata": "BKK",
+  "id": "bangkok",
+  "lat": 13.75,
+  "lon": 100.5,
+  "miles": {
+    "basis": "基本マイル数(片道×2)",
+    "chartDate": "2026-04-16",
+    "checkedAt": "2026-09-21T12:00:00+09:00",
+    "cls": "エコノミー",
+    "note": "大阪(関西)・名古屋(中部)発の基本マイル数。東京発は片道13,500〜",
+    "ow": 12500,
+    "rt": 25000,
+    "source": "JAL 国際線特典航空券 必要マイル数(日本発着・片道・エコノミー基本)",
+    "url": "https://www.jal.co.jp/jp/ja/jalmile/use/jal/inter/routemiles.html"
+  },
+  "name": "バンコク",
+  "region": "アジア",
+  "route": {
+    "basis": "確認済(スカイチケット)",
+    "duration": "約6時間(往路6時間10分/復路6時間5分)",
+    "kind": "直行",
+    "note": "中部発の直行便(タイAirAsia X)を確認。最安運賃はベトジェットのハノイ乗継",
+    "via": []
+  },
+  "spring": {
+    "flight": {
+      "high": 57170,
+      "low": 54350,
+      "rec": 55760
+    },
+    "note": "Trip.com 名古屋発の月別平均(往復・過去12か月): 2月57,170円・3月54,350円。年間最安は11月35,980円、最高は6月84,370円",
+    "when": "3月の方が2月より安い"
+  },
+  "status": "wish",
+  "summer": {
+    "flight": {
+      "high": 76020,
+      "low": 61550,
+      "rec": 68785
+    },
+    "note": "Trip.com 名古屋発の月別平均(往復・過去12か月): 8月76,020円・9月61,550円",
+    "when": "9月の方が8月より安い"
+  },
+  "today": {
+    "flight": {
+      "airline": "ベトジェットエア",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示、ハノイ経由)。10/29〜11/5の運賃(前回と同額)。",
+      "origin": "NGO",
+      "price": 52130,
+      "route": "ハノイ経由(往復最安)。中部発の直行便(タイAirAsia X)は別ルート",
+      "source": "Trip.com 名古屋発バンコク",
+      "url": "https://jp.trip.com/flights/nagoya-to-bangkok/airfares-ngo-bkk/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

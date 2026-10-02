@@ -1,0 +1,47 @@
+{
+  "country": "フィンランド",
+  "iata": "HEL",
+  "id": "helsinki",
+  "lat": 60.17,
+  "lon": 24.94,
+  "miles": {
+    "basis": "基本マイル数(片道×2)",
+    "chartDate": "2026-04-16",
+    "checkedAt": "2026-09-21T12:00:00+09:00",
+    "cls": "エコノミー",
+    "ow": 23000,
+    "rt": 46000,
+    "source": "JAL 国際線特典航空券 必要マイル数(日本発着・片道・エコノミー基本)",
+    "url": "https://www.jal.co.jp/jp/ja/jalmile/use/jal/inter/routemiles.html"
+  },
+  "name": "ヘルシンキ",
+  "region": "ヨーロッパ",
+  "route": {
+    "basis": "想定",
+    "duration": "",
+    "kind": "乗継あり",
+    "note": "乗継地は一例。最安ルートは毎日の探索で更新します",
+    "via": [
+      {
+        "code": "ICN",
+        "lat": 37.46,
+        "lon": 126.45
+      }
+    ]
+  },
+  "status": "wish",
+  "today": {
+    "flight": {
+      "airline": "吉祥航空",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示)。11/11〜11/17の運賃(前回と同額)。片道最安は香港エクスプレス113,990円(10/11)。JAL直行便もこの区間に就航。",
+      "origin": "NGO",
+      "price": 166250,
+      "route": "経由1回(乗継地の詳細は出典に記載なし)",
+      "source": "Trip.com 名古屋発ヘルシンキ",
+      "url": "https://jp.trip.com/flights/nagoya-to-helsinki/airfares-ngo-hel/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

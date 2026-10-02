@@ -1,0 +1,42 @@
+{
+  "country": "ギリシャ",
+  "iata": "JTR",
+  "id": "santorini",
+  "lat": 36.39,
+  "lon": 25.43,
+  "name": "サントリーニ島",
+  "region": "ヨーロッパ",
+  "route": {
+    "basis": "想定",
+    "duration": "",
+    "kind": "乗継あり",
+    "note": "乗継地は一例。最安ルートは毎日の探索で更新します。島へはアテネ経由が一般的",
+    "via": [
+      {
+        "code": "ICN",
+        "lat": 37.46,
+        "lon": 126.45
+      },
+      {
+        "code": "ATH",
+        "lat": 37.94,
+        "lon": 23.94
+      }
+    ]
+  },
+  "status": "wish",
+  "today": {
+    "flight": {
+      "airline": "フィンエアー",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示)。10/9〜10/17の運賃(前回と同額)。片道最安は293,670円(フィンエアー・経由1回・10/9)。アテネ経由が一般的で、アテネ〜サントリーニは別便の可能性あり(未確認)。",
+      "origin": "NGO",
+      "price": 382740,
+      "route": "経由2回",
+      "source": "Trip.com 名古屋発サントリーニ島",
+      "url": "https://jp.trip.com/flights/nagoya-to-santorini/airfares-ngo-jtr/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

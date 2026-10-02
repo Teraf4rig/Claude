@@ -1,0 +1,42 @@
+{
+  "country": "ポルトガル",
+  "iata": "LIS",
+  "id": "lisbon",
+  "lat": 38.72,
+  "lon": -9.14,
+  "name": "リスボン",
+  "region": "ヨーロッパ",
+  "route": {
+    "basis": "確認済(スカイチケット 最安運賃の経路)",
+    "duration": "約26時間20分(往路・成田・マドリード乗継。出発・到着時刻から算出)",
+    "kind": "乗継あり",
+    "note": "最安運賃は成田・マドリード乗継(イベリア)",
+    "via": [
+      {
+        "code": "NRT",
+        "lat": 35.77,
+        "lon": 140.39
+      },
+      {
+        "code": "MAD",
+        "lat": 40.49,
+        "lon": -3.57
+      }
+    ]
+  },
+  "status": "wish",
+  "today": {
+    "flight": {
+      "airline": "イベリア航空",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "2027/2/1発・2/8帰りの検索例の最安(成田・マドリード乗継、前回とほぼ同額)。ブリティッシュエアウェイズ227,830円、ANA230,880円、JAL264,260円。",
+      "origin": "NGO",
+      "price": 225560,
+      "route": "NGO→NRT→MAD→LIS 乗継2回",
+      "source": "スカイチケット 名古屋発リスボン",
+      "url": "https://skyticket.jp/nagoya-lisbon/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

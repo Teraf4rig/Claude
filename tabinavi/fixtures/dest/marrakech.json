@@ -1,0 +1,42 @@
+{
+  "country": "モロッコ",
+  "iata": "RAK",
+  "id": "marrakech",
+  "lat": 31.63,
+  "lon": -8.01,
+  "name": "マラケシュ",
+  "region": "中東・アフリカ",
+  "route": {
+    "basis": "想定",
+    "duration": "",
+    "kind": "乗継あり",
+    "note": "乗継地は一例。最安ルートは毎日の探索で更新します",
+    "via": [
+      {
+        "code": "ICN",
+        "lat": 37.46,
+        "lon": 126.45
+      },
+      {
+        "code": "IST",
+        "lat": 41.26,
+        "lon": 28.75
+      }
+    ]
+  },
+  "status": "wish",
+  "today": {
+    "flight": {
+      "airline": "カタール航空",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示)。10/6〜10/13の運賃(前回と同額)。片道最安は92,890円(ベトナム航空)。経由が多い便のため実際の旅程は要確認。",
+      "origin": "NGO",
+      "price": 207160,
+      "route": "経由4回",
+      "source": "Trip.com 名古屋発マラケシュ",
+      "url": "https://jp.trip.com/flights/nagoya-to-marrakech/airfares-ngo-rak/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

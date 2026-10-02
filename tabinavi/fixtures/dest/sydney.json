@@ -1,0 +1,61 @@
+{
+  "country": "オーストラリア",
+  "iata": "SYD",
+  "id": "sydney",
+  "lat": -33.87,
+  "lon": 151.21,
+  "miles": {
+    "basis": "基本マイル数(片道×2)",
+    "chartDate": "2026-04-16",
+    "checkedAt": "2026-09-21T12:00:00+09:00",
+    "cls": "エコノミー",
+    "ow": 23000,
+    "rt": 46000,
+    "source": "JAL 国際線特典航空券 必要マイル数(日本発着・片道・エコノミー基本)",
+    "url": "https://www.jal.co.jp/jp/ja/jalmile/use/jal/inter/routemiles.html"
+  },
+  "name": "シドニー",
+  "region": "オセアニア",
+  "route": {
+    "basis": "確認済(スカイチケット 最安運賃の経路)",
+    "duration": "約18時間35分(往路)",
+    "kind": "乗継あり",
+    "note": "最安運賃は上海乗継(中国東方航空)",
+    "via": [
+      {
+        "code": "PVG",
+        "lat": 31.14,
+        "lon": 121.81
+      }
+    ]
+  },
+  "spring": {
+    "flight": {
+      "high": 96710,
+      "low": 66380,
+      "rec": 81545
+    },
+    "note": "Trip.com 名古屋発の月別平均(往復・過去12か月): 2月96,710円・3月66,380円。前回記載(年間最安11月110,430円/最高4月216,130円)とは値の傾向が異なるため次回以降も要再確認",
+    "when": "3月の方が2月より大幅に安い"
+  },
+  "status": "cand",
+  "summer": {
+    "flight": {},
+    "note": "Trip.com 名古屋発の月別平均(往復・過去12か月): 8月93,700円。9月の値は出典に記載なし。",
+    "when": ""
+  },
+  "today": {
+    "flight": {
+      "airline": "中国東方航空",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示)。11/9〜11/16の運賃(前回と同額)。片道最安はセブパシフィック航空52,760円(マニラ経由・12/3)。",
+      "origin": "NGO",
+      "price": 100300,
+      "route": "上海(PVG)経由1回",
+      "source": "Trip.com 名古屋発シドニー",
+      "url": "https://jp.trip.com/flights/nagoya-to-sydney/airfares-ngo-syd/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

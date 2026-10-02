@@ -1,0 +1,37 @@
+{
+  "country": "モルディブ",
+  "iata": "MLE",
+  "id": "male",
+  "lat": 4.18,
+  "lon": 73.51,
+  "name": "マレ",
+  "region": "アジア",
+  "route": {
+    "basis": "確認済(スカイチケット 最安運賃の経路)",
+    "duration": "約15時間25分(往路)",
+    "kind": "乗継あり",
+    "note": "最安運賃はシンガポール乗継",
+    "via": [
+      {
+        "code": "SIN",
+        "lat": 1.36,
+        "lon": 103.99
+      }
+    ]
+  },
+  "status": "wish",
+  "today": {
+    "flight": {
+      "airline": "中国東方航空",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示)。11/18〜11/21の運賃(前回と同額)。片道最安は67,450円(10/19)。",
+      "origin": "NGO",
+      "price": 106490,
+      "route": "上海(PVG)経由2回",
+      "source": "Trip.com 名古屋発マレ",
+      "url": "https://jp.trip.com/flights/nagoya-to-male/airfares-ngo-mle/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

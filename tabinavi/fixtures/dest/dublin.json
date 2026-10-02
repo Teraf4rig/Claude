@@ -1,0 +1,42 @@
+{
+  "country": "アイルランド",
+  "iata": "DUB",
+  "id": "dublin",
+  "lat": 53.35,
+  "lon": -6.26,
+  "name": "ダブリン",
+  "region": "ヨーロッパ",
+  "route": {
+    "basis": "想定",
+    "duration": "",
+    "kind": "乗継あり",
+    "note": "乗継地は一例。最安ルートは毎日の探索で更新します",
+    "via": [
+      {
+        "code": "HND",
+        "lat": 35.55,
+        "lon": 139.78
+      },
+      {
+        "code": "LHR",
+        "lat": 51.47,
+        "lon": -0.46
+      }
+    ]
+  },
+  "status": "cand",
+  "today": {
+    "flight": {
+      "airline": "中国東方航空",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示)。10/15〜10/19の運賃(前回と同額)。経由2回のため所要時間が長い点に留意。",
+      "origin": "NGO",
+      "price": 186460,
+      "route": "上海(PVG)経由2回",
+      "source": "Trip.com 名古屋発ダブリン",
+      "url": "https://jp.trip.com/flights/nagoya-to-dublin/airfares-ngo-dub/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

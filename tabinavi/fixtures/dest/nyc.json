@@ -1,0 +1,47 @@
+{
+  "country": "米国",
+  "iata": "JFK",
+  "id": "nyc",
+  "lat": 40.71,
+  "lon": -74,
+  "miles": {
+    "basis": "基本マイル数(片道×2)",
+    "chartDate": "2026-04-16",
+    "checkedAt": "2026-09-21T12:00:00+09:00",
+    "cls": "エコノミー",
+    "ow": 27000,
+    "rt": 54000,
+    "source": "JAL 国際線特典航空券 必要マイル数(日本発着・片道・エコノミー基本)",
+    "url": "https://www.jal.co.jp/jp/ja/jalmile/use/jal/inter/routemiles.html"
+  },
+  "name": "ニューヨーク",
+  "region": "北米",
+  "route": {
+    "basis": "想定",
+    "duration": "",
+    "kind": "乗継あり",
+    "note": "乗継地は一例。最安ルートは毎日の探索で更新します",
+    "via": [
+      {
+        "code": "HND",
+        "lat": 35.55,
+        "lon": 139.78
+      }
+    ]
+  },
+  "status": "wish",
+  "today": {
+    "flight": {
+      "airline": "フィリピン航空",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示)。11/7〜11/10の運賃(前回と同額)。片道最安はチェジュ航空78,920円(仁川経由・10/20)。",
+      "origin": "NGO",
+      "price": 162240,
+      "route": "マニラ(MNL)・香港(HKG)経由",
+      "source": "Trip.com 名古屋発ニューヨーク",
+      "url": "https://jp.trip.com/flights/nagoya-to-new-york/airfares-ngo-nyc/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

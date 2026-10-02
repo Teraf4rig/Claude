@@ -1,0 +1,65 @@
+{
+  "country": "シンガポール",
+  "iata": "SIN",
+  "id": "singapore",
+  "lat": 1.35,
+  "lon": 103.82,
+  "miles": {
+    "basis": "基本マイル数(片道×2)",
+    "chartDate": "2026-04-16",
+    "checkedAt": "2026-09-21T12:00:00+09:00",
+    "cls": "エコノミー",
+    "ow": 13000,
+    "rt": 26000,
+    "source": "JAL 国際線特典航空券 必要マイル数(日本発着・片道・エコノミー基本)",
+    "url": "https://www.jal.co.jp/jp/ja/jalmile/use/jal/inter/routemiles.html"
+  },
+  "name": "シンガポール",
+  "region": "アジア",
+  "route": {
+    "basis": "想定",
+    "duration": "",
+    "kind": "乗継あり",
+    "note": "乗継地は一例。最安ルートは毎日の探索で更新します",
+    "via": [
+      {
+        "code": "TPE",
+        "lat": 25.08,
+        "lon": 121.23
+      }
+    ]
+  },
+  "spring": {
+    "flight": {
+      "high": 91440,
+      "low": 84520,
+      "rec": 87980
+    },
+    "note": "Trip.com 名古屋発の月別平均(往復・過去12か月): 2月84,520円・3月91,440円",
+    "when": "2月の方が3月より安い"
+  },
+  "status": "cand",
+  "summer": {
+    "flight": {
+      "high": 125140,
+      "low": 89530,
+      "rec": 107335
+    },
+    "note": "Trip.com 名古屋発の月別平均(往復・過去12か月): 8月125,140円・9月89,530円",
+    "when": "9月の方が8月より安い"
+  },
+  "today": {
+    "flight": {
+      "airline": "ベトジェットエア",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示、ハノイ経由)。11/15〜11/19の運賃(前回と同額)。片道最安は28,980円。",
+      "origin": "NGO",
+      "price": 60700,
+      "route": "ハノイ経由2回",
+      "source": "Trip.com 名古屋発シンガポール",
+      "url": "https://jp.trip.com/flights/nagoya-to-singapore/airfares-ngo-sin/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

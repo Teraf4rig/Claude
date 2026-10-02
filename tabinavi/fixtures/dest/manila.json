@@ -1,0 +1,59 @@
+{
+  "country": "フィリピン",
+  "iata": "MNL",
+  "id": "manila",
+  "lat": 14.6,
+  "lon": 120.98,
+  "miles": {
+    "basis": "基本マイル数(片道×2)",
+    "chartDate": "2026-04-16",
+    "checkedAt": "2026-09-21T12:00:00+09:00",
+    "cls": "エコノミー",
+    "ow": 10000,
+    "rt": 20000,
+    "source": "JAL 国際線特典航空券 必要マイル数(日本発着・片道・エコノミー基本)",
+    "url": "https://www.jal.co.jp/jp/ja/jalmile/use/jal/inter/routemiles.html"
+  },
+  "name": "マニラ",
+  "region": "アジア",
+  "route": {
+    "basis": "確認済(Trip.com)",
+    "duration": "約4時間50分",
+    "kind": "直行",
+    "note": "中部発の直行便(セブパシフィック等)を確認",
+    "via": []
+  },
+  "spring": {
+    "flight": {
+      "high": 60780,
+      "low": 57240,
+      "rec": 59010
+    },
+    "note": "Trip.com 名古屋発の月別平均(往復・過去12か月): 2月60,780円・3月57,240円",
+    "when": "3月の方が2月より安い"
+  },
+  "status": "wish",
+  "summer": {
+    "flight": {
+      "high": 63530,
+      "low": 62480,
+      "rec": 63000
+    },
+    "note": "Trip.com 名古屋発の月別平均(往復・過去12か月): 8月62,480円・9月63,530円。年間の最安月は5月(53,310円)",
+    "when": "8月〜9月は同水準"
+  },
+  "today": {
+    "flight": {
+      "airline": "セブパシフィック航空",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示)。11/13〜11/20の運賃(前回と同額)。",
+      "origin": "NGO",
+      "price": 40200,
+      "route": "NGO⇄マニラ 直行",
+      "source": "Trip.com 名古屋発マニラ",
+      "url": "https://jp.trip.com/flights/nagoya-to-manila/airfares-ngo-mnl/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

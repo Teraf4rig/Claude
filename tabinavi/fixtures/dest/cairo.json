@@ -1,0 +1,70 @@
+{
+  "country": "エジプト",
+  "iata": "CAI",
+  "id": "cairo",
+  "lat": 30.04,
+  "lon": 31.24,
+  "name": "カイロ",
+  "region": "中東・アフリカ",
+  "route": {
+    "basis": "確認済(Trip.com 最安運賃の経路)",
+    "duration": "",
+    "kind": "乗継あり",
+    "note": "最安運賃は中国東方航空の上海浦東(PVG)経由",
+    "via": [
+      {
+        "code": "PVG",
+        "lat": 31.14,
+        "lon": 121.81
+      }
+    ]
+  },
+  "routes": [
+    {
+      "basis": "確認済(Trip.com 最安運賃の経路)",
+      "duration": "",
+      "kind": "乗継あり",
+      "note": "最安運賃は中国東方航空の上海浦東(PVG)経由",
+      "via": [
+        {
+          "code": "PVG",
+          "lat": 31.14,
+          "lon": 121.81
+        }
+      ]
+    }
+  ],
+  "spring": {
+    "flight": {
+      "high": 142960,
+      "low": 125240,
+      "rec": 134100
+    },
+    "note": "Trip.com 名古屋発の月別平均(往復・過去12か月): 2月125,240円・3月142,960円",
+    "when": "2月の方が3月より安い"
+  },
+  "status": "wish",
+  "summer": {
+    "flight": {
+      "high": 144300,
+      "low": 128430,
+      "rec": 136365
+    },
+    "note": "Trip.com 名古屋発の月別平均(往復・過去12か月): 8月144,300円・9月128,430円。年間最安は11月101,040円",
+    "when": "9月の方が8月より安い"
+  },
+  "today": {
+    "flight": {
+      "airline": "中国東方航空",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示)。11/12〜11/18の運賃(前回と同額)。",
+      "origin": "NGO",
+      "price": 126340,
+      "route": "上海浦東(PVG)経由",
+      "source": "Trip.com 名古屋発カイロ",
+      "url": "https://jp.trip.com/flights/nagoya-to-cairo/airfares-ngo-cai/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

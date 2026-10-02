@@ -1,0 +1,47 @@
+{
+  "country": "カナダ",
+  "iata": "YVR",
+  "id": "vancouver",
+  "lat": 49.28,
+  "lon": -123.12,
+  "miles": {
+    "basis": "基本マイル数(片道×2)",
+    "chartDate": "2026-04-16",
+    "checkedAt": "2026-09-21T12:00:00+09:00",
+    "cls": "エコノミー",
+    "ow": 27000,
+    "rt": 54000,
+    "source": "JAL 国際線特典航空券 必要マイル数(日本発着・片道・エコノミー基本)",
+    "url": "https://www.jal.co.jp/jp/ja/jalmile/use/jal/inter/routemiles.html"
+  },
+  "name": "バンクーバー",
+  "region": "北米",
+  "route": {
+    "basis": "想定",
+    "duration": "",
+    "kind": "乗継あり",
+    "note": "乗継地は一例。最安ルートは毎日の探索で更新します",
+    "via": [
+      {
+        "code": "HND",
+        "lat": 35.55,
+        "lon": 139.78
+      }
+    ]
+  },
+  "status": "cand",
+  "today": {
+    "flight": {
+      "airline": "中国東方航空",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示)。11/22〜11/26の運賃(前回133,240円からやや下落)。片道最安はJAL66,370円(成田経由・11/25)。前回確認できたセール表記(30%オフ)は今回のページでは確認できず。",
+      "origin": "NGO",
+      "price": 131960,
+      "route": "上海(PVG)経由",
+      "source": "Trip.com 名古屋発バンクーバー",
+      "url": "https://jp.trip.com/flights/nagoya-to-vancouver/airfares-ngo-yvr/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}

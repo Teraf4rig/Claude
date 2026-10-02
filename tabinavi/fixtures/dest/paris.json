@@ -1,0 +1,57 @@
+{
+  "country": "フランス",
+  "iata": "CDG",
+  "id": "paris",
+  "lat": 48.86,
+  "lon": 2.35,
+  "miles": {
+    "basis": "基本マイル数(片道×2)",
+    "chartDate": "2026-04-16",
+    "checkedAt": "2026-09-21T12:00:00+09:00",
+    "cls": "エコノミー",
+    "ow": 27000,
+    "rt": 54000,
+    "source": "JAL 国際線特典航空券 必要マイル数(日本発着・片道・エコノミー基本)",
+    "url": "https://www.jal.co.jp/jp/ja/jalmile/use/jal/inter/routemiles.html"
+  },
+  "name": "パリ",
+  "region": "ヨーロッパ",
+  "route": {
+    "basis": "確認済(スカイチケット 最安運賃の経路)",
+    "duration": "約30時間5分(往路・最安運賃)",
+    "kind": "乗継あり",
+    "note": "最安運賃は香港乗継(キャセイ)",
+    "via": [
+      {
+        "code": "HKG",
+        "lat": 22.31,
+        "lon": 113.92
+      }
+    ]
+  },
+  "spring": {
+    "flight": {},
+    "note": "Trip.com 名古屋発の月別片道平均価格(過去12か月): 2月81,130円・3月103,130円(片道と確認)。往復の月別平均価格は出典に記載なし。",
+    "when": ""
+  },
+  "status": "wish",
+  "summer": {
+    "flight": {},
+    "note": "Trip.com 名古屋発の月別片道平均価格(過去12か月): 8月136,190円(年間最高)・9月90,350円(片道と確認)。往復の月別平均価格は出典に記載なし。",
+    "when": "8月は年間最高"
+  },
+  "today": {
+    "flight": {
+      "airline": "ベトナム航空",
+      "checkedAt": "2026-09-23T06:35:00+09:00",
+      "confidence": "mid",
+      "note": "Trip.com掲載の往復最安(エコノミー・1名・諸税込みの表示)。10/22〜10/27の運賃(前回と同額)。片道最安はベトナム航空74,530円(ハノイ経由・11/18)。",
+      "origin": "NGO",
+      "price": 155890,
+      "route": "ホーチミン(SGN)経由2回",
+      "source": "Trip.com 名古屋発パリ",
+      "url": "https://jp.trip.com/flights/nagoya-to-paris/airfares-ngo-par/"
+    }
+  },
+  "updatedAt": "2026-09-23T06:35:00+09:00"
+}
