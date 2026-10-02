@@ -223,7 +223,7 @@ button,input{font-family:inherit}
 }
 
 /* ---- boarding pass ---- */
-.pass{grid-area:pass;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--e3);overflow:hidden;min-width:0}
+.pass{grid-area:pass;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--e3);overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;min-width:0}
 .pass-h{background:var(--navy);color:var(--onnavy);padding:9px 18px;display:flex;justify-content:space-between;align-items:center;gap:8px;font:400 11px var(--dot);letter-spacing:.16em}
 .badge{font:700 11px/1 var(--sans);letter-spacing:.04em;padding:5px 8px;border-radius:5px;background:var(--route);color:#fff}
 .badge.w{background:transparent;border:1px dashed var(--onnavy2);color:var(--onnavy2)}
@@ -504,7 +504,7 @@ body{font-feature-settings:"tnum" 1,"lnum" 1;font-variant-numeric:tabular-nums l
 .hkpi button{cursor:pointer;transition:background .15s}
 .hkpi button:hover{background:rgba(var(--route-rgb),.12)}
 .hkpi button .v b{color:var(--amber)}
-.globe-box{position:relative;width:100%;max-width:540px;justify-self:end;aspect-ratio:1/1}
+.globe-box{position:relative;width:100%;max-width:min(540px,58vh);justify-self:end;aspect-ratio:1/1}
 .globe-box canvas{display:block;width:100%;height:100%;cursor:grab;touch-action:pan-y}
 .globe-box canvas.drag{cursor:grabbing}
 .globe-cap{position:absolute;left:0;right:0;bottom:2%;text-align:center;font:500 10px var(--dot);letter-spacing:.16em;color:var(--m-dim);pointer-events:none}
@@ -580,11 +580,14 @@ body{font-feature-settings:"tnum" 1,"lnum" 1;font-variant-numeric:tabular-nums l
 .flegend i{display:inline-block;width:10px;height:2px;background:var(--ink);vertical-align:middle;margin-right:5px}
 @media (max-width:480px){.fares{grid-template-columns:1fr}.pfields{grid-template-columns:repeat(2,minmax(0,1fr))}.pfields div:nth-child(3){border-left:0}.pfields div:nth-child(n+3){border-top:1px solid var(--line)}}
 @media (prefers-reduced-motion:reduce){.hero .eyebrow .live{animation:none}}
+/* v8 */
+.pass-h{position:sticky;top:0;z-index:2}
 /* v8: mobile polish */
 .fold>summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:8px}
 .fold>summary::-webkit-details-marker{display:none}
 .fold>summary::after{content:'+';font:600 15px/1 var(--dot);color:var(--route)}
 .fold[open]>summary::after{content:'\2212'}
+@media (min-width:1101px){.hero{padding-block:28px 24px}}
 @media (min-width:641px){.fold>summary{pointer-events:none}.fold>summary::after{display:none}}
 @media (max-width:640px){
   .mast{position:sticky;top:0;z-index:50}
