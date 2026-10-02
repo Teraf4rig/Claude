@@ -662,6 +662,27 @@ h1,h2,h3{letter-spacing:.01em}
 .legend{background:var(--panel);border-color:var(--line);color:var(--ink2);border-radius:10px}
 .pickbar{border-radius:999px;background:var(--panel);color:var(--ink)}
 .toast{border-radius:999px}
+
+/* ---- v11 cinematic hero: 地球儀の正面にある都市の写真を背景に出す ---- */
+.hero{min-height:min(94vh,900px);display:flex;flex-direction:column;justify-content:center;padding-block:56px 150px}
+.hero > .wrap{position:relative;z-index:2;width:100%}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden;background:#06152B}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,18,38,.86) 0%,rgba(6,18,38,.55) 48%,rgba(6,18,38,.25) 100%),linear-gradient(0deg,rgba(6,18,38,.9) 0%,rgba(6,18,38,0) 38%)}
+.hb{position:absolute;inset:-4%;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease;will-change:opacity,transform}
+.hb.on{opacity:1;animation:kb 18s ease-out forwards}
+@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.1)}}
+.hero > .hero-city{position:absolute;left:0;right:0;bottom:0;margin-inline:auto;z-index:3;padding-bottom:34px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 32px}
+.hc-name{display:block;font:900 clamp(40px,7vw,96px)/1 var(--serif);letter-spacing:.01em;color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hc-sub{display:block;margin-top:10px;font:500 14px var(--sans);color:#D5E2F5}
+.hc-r{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.hc-price{font:800 30px/1 var(--sans);color:#fff}
+.hc-price small{display:block;font:500 11.5px var(--sans);color:#BFD0E8;margin-bottom:5px}
+.hc-credit{flex-basis:100%;font:400 11px var(--sans);color:#9FB6D2;margin-top:2px}
+.hero-city.sw .hc-name,.hero-city.sw .hc-sub,.hero-city.sw .hc-r{animation:hcIn .7s ease both}
+@keyframes hcIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.hb.on{animation:none}.hb{transition:none}.hero-city.sw .hc-name,.hero-city.sw .hc-sub,.hero-city.sw .hc-r{animation:none}}
+@media (max-width:1100px){.hero{padding-bottom:170px}}
+@media (max-width:640px){.hero{min-height:0;padding-block:36px 150px}.hc-r{gap:12px}.hc-price{font-size:24px}.hero-city{padding-bottom:22px}}
 footer.site{border-top:1px solid var(--line)}
 @media (max-width:640px){
   .hkpi > *{padding:10px 12px}
@@ -688,6 +709,7 @@ footer.site{border-top:1px solid var(--line)}
 
 <main id="top">
   <section class="hero">
+    <div class="hero-bg" id="heroBg" aria-hidden="true"><div class="hb"></div><div class="hb"></div></div>
     <div class="wrap">
       <div class="hero-txt">
         <h1>次は<span>、</span>どこへ飛ぶ。</h1>
@@ -701,6 +723,7 @@ footer.site{border-top:1px solid var(--line)}
         <div class="globe-cap" aria-hidden="true">ドラッグで回転、点をタップで選択</div>
       </div>
     </div>
+    <div class="wrap hero-city" id="heroCity" aria-live="polite"></div>
   </section>
 
   <section class="atlas" id="map">
@@ -1188,7 +1211,7 @@ var Globe=(function(){
   var COL={cheap:css('--m-cheap','#3FC38B'),mid:css('--m-mid','#E3AE2B'),high:css('--m-high','#EE7A66'),none:css('--m-none','#6F8595'),route:'#FF7A2E',dot:'#86B3CF'};
   var rot={lon:NGO.lon+18,lat:24},tgt=null,spin=reduce?0:-6,idleUntil=0;
   var W=0,H=0,R=0,cx=0,cy=0,dpr=1,onScreen=true,raf=0,lastT=0,drag=null,moved=false;
-  var arcs=[],selId=null,home=vec(NGO.lon,NGO.lat);
+  var arcs=[],selId=null,home=vec(NGO.lon,NGO.lat),onCenter=null,cid=null,lastC=0;
   function vec(lon,lat){var cl=Math.cos(lat*D2R);return [cl*Math.cos(lon*D2R),cl*Math.sin(lon*D2R),Math.sin(lat*D2R)];}
   function mat(){var l=rot.lon*D2R,p=rot.lat*D2R,sl=Math.sin(l),cl=Math.cos(l),sp=Math.sin(p),cp=Math.cos(p);
     return [-sl,cl,0, -sp*cl,-sp*sl,cp, cp*cl,cp*sl,sp];}
@@ -1269,6 +1292,9 @@ var Globe=(function(){
     if(tgt){var dl=((tgt.lon-rot.lon+540)%360)-180,dp=tgt.lat-rot.lat,k=Math.min(1,dt*3.2);rot.lon+=dl*k;rot.lat+=dp*k;if(Math.abs(dl)<.05&&Math.abs(dp)<.05)tgt=null;}
     else if(!drag&&now>idleUntil)rot.lon+=spin*dt;
     draw(now);
+    if(onCenter&&now-lastC>350){lastC=now;var c=vec(rot.lon,rot.lat),bd=-2,bid=null;
+      arcs.forEach(function(a){var dp2=c[0]*a.v[0]+c[1]*a.v[1]+c[2]*a.v[2];if(dp2>bd){bd=dp2;bid=a.id;}});
+      if(bid&&bid!==cid){cid=bid;onCenter(bid);}}
     if(onScreen&&!document.hidden&&(!reduce||tgt))raf=requestAnimationFrame(loop);
   }
   function kick(){if(!raf){lastT=0;raf=requestAnimationFrame(loop);}}
@@ -1289,9 +1315,10 @@ var Globe=(function(){
   document.addEventListener('visibilitychange',function(){if(!document.hidden)redraw();});
   size();redraw();
   return {
+    setCenterHandler:function(fn){onCenter=fn;cid=null;lastC=0;},
     update:function(list,sid){
       var prevSel=selId;selId=sid;
-      arcs=list.map(function(d){return {id:d.id,code:d.iata||'',t:tierOf(MODES[mode].flight(d)),p:buildArc(d)};});
+      arcs=list.map(function(d){return {id:d.id,code:d.iata||'',t:tierOf(MODES[mode].flight(d)),p:buildArc(d),v:vec(d.lon,d.lat)};});
       if(sid&&sid!==prevSel&&prevSel!==null){var d=dests.get(sid);if(d){var mid=slerp(home,vec(d.lon,d.lat),.5);
         tgt={lon:Math.atan2(mid[1],mid[0])/D2R,lat:Math.max(-40,Math.min(55,Math.asin(mid[2])/D2R+8))};idleUntil=performance.now()+7000;}}
       redraw();
@@ -1299,6 +1326,36 @@ var Globe=(function(){
   };
 })();
 
+
+/* ---------- hero: city photo follows the globe ---------- */
+var CITY_PHOTOS={},CITY_CREDITS={}; /* id -> data URI / 撮影者・ライセンス */
+var heroCur=null,heroFront=0;
+function cityTint(d){var hu=Math.round(((d.lon+180)/360*300+200)%360),hu2=(hu+40)%360;
+  return 'radial-gradient(120% 90% at 70% 20%,hsl('+hu+' 55% 38%) 0%,transparent 60%),radial-gradient(100% 90% at 10% 100%,hsl('+hu2+' 60% 22%) 0%,transparent 70%),#0B2342';}
+function setHeroCity(id,force){
+  var d=dests.get(id);if(!d)return;
+  var layers=document.querySelectorAll('#heroBg .hb');
+  if(id!==heroCur||force){
+    if(id!==heroCur){
+      heroFront=1-heroFront;var nl=layers[heroFront],ol=layers[1-heroFront];
+      var ph=CITY_PHOTOS[id];nl.style.backgroundImage=ph?'url('+ph+')':cityTint(d);
+      nl.classList.remove('on');void nl.offsetWidth;nl.classList.add('on');ol.classList.remove('on');
+    }
+    heroCur=id;
+  }
+  var el=$('heroCity');if(!el)return;
+  var p=MODES[mode].flight(d);
+  clear(el);
+  el.classList.remove('sw');void el.offsetWidth;el.classList.add('sw');
+  var kids=[
+    h('div',null,h('span',{class:'hc-name'},d.name||d.id),h('span',{class:'hc-sub'},[d.country,d.region,d.iata].filter(Boolean).join(' · '))),
+    h('div',{class:'hc-r'},
+      p!=null?h('div',{class:'hc-price'},h('small',null,MODES[mode].head),yen(p)):null,
+      h('button',{type:'button',class:'key go',onclick:function(){select(d.id);var m=$('map');if(m)m.scrollIntoView({block:'start'});}},'この行き先を見る')),
+    CITY_CREDITS[id]?h('div',{class:'hc-credit'},'Photo: '+CITY_CREDITS[id]):null];
+  kids.forEach(function(k){if(k)el.append(k);});
+}
+if(Globe)Globe.setCenterHandler(function(id){setHeroCity(id);});
 function renderHeroKpi(list){
   var el=$('hkpi');if(!el)return;clear(el);
   var f=MODES[mode].flight,best=null,okN=0;
@@ -1317,7 +1374,7 @@ function render(){
     var best=null;list.forEach(function(d){var p=MODES[mode].flight(d);if(p!=null&&(best==null||p<best.p))best={p:p,d:d};});
     sel=best?best.d.id:(list[0]?list[0].id:null);
   }
-  renderKeys();renderHeroKpi(list);if(Globe)Globe.update(list,sel);renderMiles();renderMap(list);renderPass();renderBoard(list);renderCompare();renderAdd();renderMilesSec();renderMeta();renderLegend();
+  renderKeys();renderHeroKpi(list);if(Globe)Globe.update(list,sel);if(heroCur&&dests.has(heroCur))setHeroCity(heroCur,true);renderMiles();renderMap(list);renderPass();renderBoard(list);renderCompare();renderAdd();renderMilesSec();renderMeta();renderLegend();
   if(dests.size)elState().classList.remove('on');
 }
 function elState(){return $('state');}
